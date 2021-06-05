@@ -1,0 +1,140 @@
+.controls {
+    display: flex;   
+    align-items: center; 
+    padding-left: var(--in-mobile-sides);
+    font-family: $ff-osv;
+    color: var(--co-main-white);
+    text-transform: uppercase;
+    background-color: var(--co-bg-black);
+
+    @media screen and (min-width: $rs-md-px) {
+        padding: var(--in-mobile-sides);
+    }
+
+    &__header {
+        display: flex;
+        font-size: 3.2rem;
+
+        @media screen and (min-width: $rs-md-px) {
+            font-size: 4rem;
+        }
+
+        span {
+            display: inline-block;
+            padding-left: 0.25em;
+            color: var(--co-main-orange);
+        }
+    }
+
+    &__logo {             
+        height: 1em;
+    }
+
+    &__burger {
+        margin-left: auto;
+        font-size: 6.4rem;
+
+        @media screen and (min-width: $rs-md-px) {
+            display: none;
+        }
+    }
+
+    &__navigation {
+        position: absolute;
+        top: 6.4rem;
+        left: 0;
+        right: 0;
+        bottom: 0;    
+        padding: 30px var(--in-mobile-sides);   
+        font-size: 2rem; 
+        text-transform: none;
+        background-color: var(--co-bg-black);  
+        border-top: 2px solid var(--co-lines-grey);    
+        
+        @media screen and (min-width: $rs-md-px) {
+            position: static;
+            margin-left: auto;
+            
+            border-top: none;
+        }
+        
+        &.open {
+            opacity: 0.9;
+        }
+
+        ul {
+            display: grid;
+            grid-gap: 16px;
+
+            @media screen and (min-width: $rs-md-px) {
+                grid-auto-flow: column;
+            }
+        }
+    }
+
+    &__delimiter {
+        width: 100%;
+        background-image: linear-gradient(90deg, var(--co-main-orange), var(--co-bg-black));
+
+        @media screen and (min-width: $rs-md-px) {
+            display: none;
+        }
+    }
+
+    &__navigation-item {
+        @media screen and (min-width: $rs-md-px) {
+            &.hidden {
+                display: none;
+            }
+        }
+    }
+}
+
+// Burger
+.ham {
+    width: 1em;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.line {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: var(--co-main-white);
+    stroke-width: 5.5;
+    stroke-linecap: round;
+}
+
+.ham6 {
+    .top {
+        stroke-dasharray: 40 172;
+    }
+    
+    .middle {
+        stroke-dasharray: 40 111;
+    }
+    
+    .bottom {
+        stroke-dasharray: 40 172;
+    }
+
+    &.open {
+        .top {
+            stroke-dashoffset: -132px;
+        }
+        
+        .middle {
+            stroke-dashoffset: -71px;
+        }
+        
+        .bottom {
+            stroke-dashoffset: -132px;
+        }
+    }
+} 
+

@@ -3,13 +3,19 @@ $ff-osv: 'Oswald';
 $ff-rc: 'Roboto Condensed';
 
 // Resolutions
-$xsm: 480px;
-$sm: 576px;
-$md: 768px;
-$lg: 1024px;
-$xlg: 1440px;
+$rs-xsm: 480;
+$rs-sm: 576;
+$rs-md: 768;
+$rs-lg: 1024;
+$rs-xlg: 1440;
 
-// Fonts
+$rs-xsm-px: $rs-xsm * 1px;
+$rs-sm-px: $rs-sm * 1px;
+$rs-md-px: $rs-md * 1px; 
+$rs-lg-px: $rs-lg * 1px;
+$rs-xlg-px: $rs-xlg * 1px;
+
+// Fonts 
 %f-content-header {
     font-family: $ff-osv;
     font-size: var(--fz-content-header);

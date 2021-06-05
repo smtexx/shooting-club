@@ -1,0 +1,11 @@
+body {
+    background-image: url('./assets/img/body-bg.gif');
+    background-repeat: repeat;
+}
+
+.primary-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    background-color: var(--co-bg-dark-grey);
+}
