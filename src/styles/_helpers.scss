@@ -1,0 +1,39 @@
+// Fonts families
+$ff-osv: 'Oswald';
+$ff-rc: 'Roboto Condensed';
+
+// Resolutions
+$xsm: 480px;
+$sm: 576px;
+$md: 768px;
+$lg: 1024px;
+$xlg: 1440px;
+
+// Fonts
+%f-content-header {
+    font-family: $ff-osv;
+    font-size: var(--fz-content-header);
+    color: var(--co-main-white);
+}
+
+%f-main-text {
+    font-family: $ff-rc;
+    font-size: var(--fz-main-text);
+    color: var(--co-text-grey);    
+}
+
+// Delimiters
+%d-wide {
+    padding-bottom: var(--in-delimiter-wide);
+    border-bottom: 3px solid var(--co-lines-grey);
+}
+
+%d-narrow {
+    padding-bottom: var(--in-delimiter-narrow);
+    border-bottom: 2px solid var(--co-lines-grey);
+}
+
+// Transitions
+%t-hover {
+    transition: all 0.2s ease-in-out;
+}

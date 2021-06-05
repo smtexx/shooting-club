@@ -1,0 +1,4 @@
+// Responsive value
+@function respFontSize($min, $max, $minRes, $maxRes) {
+    @return calc(#{$min * 1px} + (100vw - #{$minRes * 1px}) * #{($max - $min) / ($maxRes - $minRes)});
+}

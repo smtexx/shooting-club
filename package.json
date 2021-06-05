@@ -1,0 +1,50 @@
+{
+  "main": "index.js",
+  "private": true,
+  "browserslist": "> 0.5%, not dead",
+  "scripts": {
+    "build": "webpack --config prod.config.js",
+    "dev": "webpack",
+    "start": "webpack --watch"
+  },
+  "author": "Roman Kolmakov <cold.snowww@yahoo.com>",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.12.1",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "css-minimizer-webpack-plugin": "^3.0.0",
+    "ejs": "^3.1.6",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^9.0.0",
+    "mini-css-extract-plugin": "^1.6.0",
+    "postcss": "^8.2.15",
+    "postcss-loader": "^5.2.0",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "^1.32.13",
+    "sass-loader": "^11.1.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "name": "shooting-club",
+  "version": "2.0.0",
+  "description": "First project for portfolio",
+  "keywords": [
+    "Static",
+    "website",
+    "webpack",
+    "module",
+    "structure"
+  ]
+}

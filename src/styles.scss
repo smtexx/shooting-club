@@ -1,0 +1,12 @@
+//Basics
+@import './styles/fonts';
+@import './styles/helpers';
+@import './styles/props';
+@import './styles/mixins';
+
+// Common
+@import './styles/reset';
+@import './styles/layouts';
+
+//Pages & Blocks
+@import './html/_page-data/index/index.scss';
