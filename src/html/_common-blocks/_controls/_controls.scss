@@ -2,6 +2,7 @@
     display: flex;   
     align-items: center; 
     padding-left: var(--in-mobile-sides);
+    z-index: 10;
     font-family: $ff-osv;
     color: var(--co-main-white);
     text-transform: uppercase;
@@ -65,7 +66,7 @@
         
         &.open {
             display: block;
-            opacity: 0.9;
+            opacity: 0.85;
         }
 
         ul {
