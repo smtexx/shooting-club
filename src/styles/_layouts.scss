@@ -1,3 +1,7 @@
+:root {
+    --menuActivated: #{$rs-md};
+}
+
 body {
     background-image: url('./assets/img/body-bg.gif');
     background-repeat: repeat;
