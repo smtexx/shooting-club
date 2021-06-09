@@ -1,19 +1,18 @@
 class Controls {
     
-    constructor(burger, menu, refreshWidth) {          
-        this.initialSize = document.documentElement.clientWidth;
+    constructor(burger, menu) {         
 
+        this.burgerState = getComputedStyle(burger).display;
+        
         window.addEventListener('resize', () => {
-            let currentSize = document.documentElement.clientWidth;
-            let notReload = Math.max(currentSize, this.initialSize) <= refreshWidth || 
-                            Math.min(currentSize, this.initialSize) > refreshWidth;
-            if(!notReload) {                
-                window.location.reload();
+            let burgerCurrentState = getComputedStyle(burger).display;            
+            if(this.burgerState !== burgerCurrentState) {
+                this.burgerState = burgerCurrentState;
+                window.location.reload();                
             }
-            this.initialSize = currentSize;
         });
 
-        if(this.initialSize <= refreshWidth) {
+        if(this.burgerState !== 'none') {            
             this.burger = burger;
             this.menu = menu;
             this.isClosed = true;
