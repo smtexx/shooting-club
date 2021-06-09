@@ -1,37 +1,39 @@
 class Controls {
     
-    constructor(burger, menu) {         
-
-        this.burgerState = getComputedStyle(burger).display;
+    constructor(burger, menu) {     
         
+        this.burger = burger;
+        this.burgerState = getComputedStyle(burger).display;
+        this.svg = burger.querySelector('svg');
+        this.menu = menu;
+        this.isClosed = true;
+
         window.addEventListener('resize', () => {
-            let burgerCurrentState = getComputedStyle(burger).display;            
-            if(this.burgerState !== burgerCurrentState) {
-                this.burgerState = burgerCurrentState;
-                window.location.reload();                
+            let currentBurgerState = getComputedStyle(burger).display; 
+            if(this.burgerState !== currentBurgerState) {
+                if(currentBurgerState === 'none') {
+                    this.menu.classList.remove('open');
+                    this.svg.classList.remove('open');
+                    this.menu.style.display = '';
+                    this.isClosed = true;
+                } 
+                this.burgerState = currentBurgerState;
+            }           
+        });            
+        
+        this.burger.addEventListener('pointerdown', () => {
+            if(this.isClosed) {
+                this.openMenu();
+            } else {
+                this.closeMenu();
             }
         });
 
-        if(this.burgerState !== 'none') {            
-            this.burger = burger;
-            this.svg = burger.querySelector('svg');
-            this.menu = menu;
-            this.isClosed = true;
-            
-            this.burger.addEventListener('pointerdown', () => {
-                if(this.isClosed) {
-                    this.openMenu();
-                } else {
-                    this.closeMenu();
-                }
-            });
-    
-            this.menu.addEventListener('pointerdown', event => {
-                if(event.target.matches('#nav-menu > li')) {
-                    this.closeMenu();
-                }
-            })
-        } 
+        this.menu.addEventListener('pointerdown', event => {
+            if(event.target.matches('#nav-menu > li')) {
+                this.closeMenu();
+            }
+        })         
     }
 
     openMenu() {
@@ -40,11 +42,11 @@ class Controls {
         this.isClosed = false;
         document.body.style.height = '100vh';
         document.body.style.overflowY = 'hidden';
-        setTimeout(() => this.menu.classList.toggle('open'), 0);
+        setTimeout(() => this.menu.classList.add('open'), 0);
     }
     closeMenu() {
-        this.svg.classList.toggle('open');
-        this.menu.classList.toggle('open');
+        this.svg.classList.remove('open');
+        this.menu.classList.remove('open');
         this.isClosed = true;   
         document.body.style.height = 'auto';
         document.body.style.overflowY = 'auto';     
@@ -58,6 +60,5 @@ class Controls {
 // Controls initiation
 new Controls(
     document.getElementById('nav-burger'),
-    document.getElementById('nav-menu'),
-    parseInt(getComputedStyle(document.documentElement).getPropertyValue('--menuActivated'))
+    document.getElementById('nav-menu')   
 );
