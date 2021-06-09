@@ -14,6 +14,7 @@ class Controls {
 
         if(this.burgerState !== 'none') {            
             this.burger = burger;
+            this.svg = burger.querySelector('svg');
             this.menu = menu;
             this.isClosed = true;
             
@@ -34,7 +35,7 @@ class Controls {
     }
 
     openMenu() {
-        this.burger.classList.toggle('open');
+        this.svg.classList.toggle('open');
         this.menu.style.display = 'block';
         this.isClosed = false;
         document.body.style.height = '100vh';
@@ -42,7 +43,7 @@ class Controls {
         setTimeout(() => this.menu.classList.toggle('open'), 0);
     }
     closeMenu() {
-        this.burger.classList.toggle('open');
+        this.svg.classList.toggle('open');
         this.menu.classList.toggle('open');
         this.isClosed = true;   
         document.body.style.height = 'auto';
