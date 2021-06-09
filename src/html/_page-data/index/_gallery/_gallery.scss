@@ -1,12 +1,21 @@
 .gallery {
     display: grid;
-    grid-template: 1fr repeat(3, auto) / 100%;
+    grid-template: 1fr repeat(4, auto) / 100%;
     height: calc(100vw / 1.4015);
     color: var(--co-main-white);
     font-family: $ff-osv;
+
+
+    @media screen and (min-width: $rs-sm-px) and (max-height: $rs-sm-px) {
+        height: calc(100vh - 6.4rem);
+    }
+
+    @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
+        height: 100vh;        
+    }
   
     &__holder {
-        grid-row: 1 / 5;
+        grid-row: 1 / 6;
         grid-column: 1 / 2;
         display: grid;        
     }
@@ -37,7 +46,21 @@
         z-index: 5;
         padding: 0 var(--in-mobile-sides);
         font-size: 50px;
-        text-transform: uppercase;
+        text-transform: uppercase;     
+        
+        @media screen and (min-width: $rs-sm-px) {
+            font-size: 64px;
+        }
+
+        @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {            
+            font-size: responsiveSize(64, 100, $rs-md, $rs-lg);
+        }
+
+        @media screen and (min-width: $rs-lg-px) {
+            margin: 0 var(--in-desc-sides);
+            padding: 0;
+            font-size: 100px;
+        }
     }
 
     &__subheader {
@@ -48,6 +71,16 @@
         font-size: 28px;
         text-align: right;
         color: var(--co-main-orange);
+
+        @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {            
+            font-size: responsiveSize(28, 56, $rs-md, $rs-lg);
+        }
+
+        @media screen and (min-width: $rs-lg-px) {
+            margin: 0 var(--in-desc-sides);
+            padding: 0;
+            font-size: 56px;
+        }
 
         &::after {
             content: '';
@@ -62,8 +95,25 @@
         }
     }
 
-    &__indicator {
+    &__thumbs {
         grid-row: 4 / 5;
+        grid-column: 1 / 2;
+        display: none;
+
+        @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
+            display: grid;
+            grid-auto-flow: column;
+            grid-gap: var(--in-between-column);
+            justify-content: space-around;
+        }
+
+        @media screen and (min-width: $rs-lg-px) {
+            margin: 0 var(--in-desc-sides);
+        }
+    }
+
+    &__indicator {
+        grid-row: 5 / 6;
         grid-column: 1 / 2;
         display: grid;
         grid-auto-flow: column;

@@ -6,6 +6,26 @@
     </ul>    
     <h2 class="gallery__header">Paintball</h2>
     <a class="gallery__subheader" href="#welcome">краски войны</a>
+    <div class="gallery__thumbs">        
+        <%- include('../../../_common-blocks/_thumb/_thumb.ejs', {
+            page: './about.html',
+            imageLink: '../assets/img/about.jpg',
+            header: 'О клубе',
+            description: 'как все начиналось'
+        }) %>      
+        <%- include('../../../_common-blocks/_thumb/_thumb.ejs', {
+            page: './tournaments.html',
+            imageLink: '../assets/img/tournaments.jpg',
+            header: 'Турниры',
+            description: 'стань лучшим'
+        }) %>
+        <%- include('../../../_common-blocks/_thumb/_thumb.ejs', {
+            page: './tournaments.html',
+            imageLink: '../assets/img/maps.jpg',
+            header: 'Локации',
+            description: 'места сражений'
+        }) %>  
+    </div>
     <div class="gallery__indicator">
         <span class="active"></span><span></span><span></span>
     </div>

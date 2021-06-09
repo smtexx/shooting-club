@@ -8,12 +8,18 @@
     text-transform: uppercase;
     background-color: var(--co-bg-black);
 
-    @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
+    @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
         padding: 14px var(--in-mobile-sides);
     }
 
     @media screen and (min-width: $rs-lg-px) {
+        top: 30px;
         margin: 0 var(--in-desc-sides);
+        background-color: var(--co-bg-black-op);
     }
 
     &__header {
@@ -36,7 +42,7 @@
         height: 6.4rem;
         font-size: 6.4rem;
 
-        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
+        @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
             display: none;
         }
     }
@@ -52,9 +58,9 @@
         font-size: 2rem; 
         text-transform: none;
         background-color: var(--co-bg-black);  
-        border-top: 2px solid var(--co-lines-grey);    
+        border-top: 2px solid var(--co-lines-grey);         
         
-        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
+        @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
             display: block;
             position: static;
             margin-left: auto;
@@ -62,6 +68,10 @@
             font-size: 1.8rem;    
             border-top: none;
             text-transform: uppercase;
+        }
+
+        @media screen and (min-width: $rs-lg-px) {
+            background-color: transparent;
         }
         
         &.open {
@@ -73,7 +83,7 @@
             display: grid;
             grid-gap: 16px;
 
-            @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
+            @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
                 grid-auto-flow: column;
                 grid-gap: 20px;
             }
@@ -84,14 +94,14 @@
         width: 100%;
         background-image: linear-gradient(90deg, var(--co-main-orange), var(--co-bg-black));
 
-        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
+        @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
             display: none;
         }
     }
 
     &__navigation-item {
 
-        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
+        @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
             &.hidden {
                 display: none;
             }
