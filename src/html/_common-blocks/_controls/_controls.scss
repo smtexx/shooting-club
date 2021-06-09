@@ -8,7 +8,7 @@
     text-transform: uppercase;
     background-color: var(--co-bg-black);
 
-    @media screen and (min-width: $rs-md-px) {
+    @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
         padding: 14px var(--in-mobile-sides);
     }
 
@@ -36,7 +36,7 @@
         height: 6.4rem;
         font-size: 6.4rem;
 
-        @media screen and (min-width: $rs-md-px) {
+        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
             display: none;
         }
     }
@@ -54,7 +54,7 @@
         background-color: var(--co-bg-black);  
         border-top: 2px solid var(--co-lines-grey);    
         
-        @media screen and (min-width: $rs-md-px) {
+        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
             display: block;
             position: static;
             margin-left: auto;
@@ -73,7 +73,7 @@
             display: grid;
             grid-gap: 16px;
 
-            @media screen and (min-width: $rs-md-px) {
+            @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
                 grid-auto-flow: column;
                 grid-gap: 20px;
             }
@@ -84,14 +84,14 @@
         width: 100%;
         background-image: linear-gradient(90deg, var(--co-main-orange), var(--co-bg-black));
 
-        @media screen and (min-width: $rs-md-px) {
+        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
             display: none;
         }
     }
 
     &__navigation-item {
 
-        @media screen and (min-width: $rs-md-px) {
+        @media screen and (min-width: $rs-md-px) and (min-height: #{$rs-sm-px + 1px}) {
             &.hidden {
                 display: none;
             }
