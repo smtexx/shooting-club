@@ -5,7 +5,8 @@ class Gallery {
             this.menu = menu;
 
             this.holder = this.gallery.querySelector('.gallery__holder')
-            this.scenes = this.holder.querySelectorAll('.gallery__scene');
+            this.scenes = this.holder.querySelectorAll('.gallery__scene');  
+            this.currentSceneNo = 0;          
             this.indicators = this.gallery.querySelectorAll('.gallery__indicator span');
             this.timing = +this.gallery.dataset.timing;            
     
@@ -13,8 +14,8 @@ class Gallery {
                 this.observer = new MutationObserver(record => {            
                     if(record[0].target.classList.contains('open')) {
                         this.stop();
-                    } else {
-                        this.play();
+                    } else {                        
+                        this.play()
                     }
                 });
                 this.observer.observe(this.menu, {
@@ -30,34 +31,29 @@ class Gallery {
         }
     }
 
-    play() {
-        function changeScene(currentScene, nextScene) {                
-            currentScene.style.opacity = '0';
-            nextScene.style.opacity = '1';                                   
-        }
+    play() {      
+        function changeScene(gallery) {
+            gallery.nextSceneNo = gallery.currentSceneNo + 1;
+            if(gallery.nextSceneNo >= gallery.scenes.length) gallery.nextSceneNo = 0;
+            
+            gallery.scenes[gallery.currentSceneNo].style.opacity = '0';
+            gallery.scenes[gallery.nextSceneNo].style.opacity = '1';
+
+            gallery.indicators[gallery.currentSceneNo].classList.remove('active');
+            gallery.indicators[gallery.nextSceneNo].classList.add('active');
+
+            gallery.currentSceneNo = gallery.nextSceneNo;
+        }       
         
-        this.timetId = setInterval(() => {
-            if(!('currentSceneNo' in this)) this.currentSceneNo = 0;
-            
-            let nextSceneNo = this.currentSceneNo + 1;
-            nextSceneNo = (nextSceneNo >= this.scenes.length) ? 0 : nextSceneNo;
-            changeScene(
-                this.scenes[this.currentSceneNo], 
-                this.scenes[nextSceneNo]
-            );    
-
-            this.indicators[this.currentSceneNo].classList.remove('active');
-            this.indicators[nextSceneNo].classList.add('active');
-
-            this.currentSceneNo = nextSceneNo;                
-            
+        this.timerId = setTimeout(() => {
+            changeScene(this);
+            this.play();
         }, this.timing);
     }
 
     stop() {
-        clearInterval(this.timetId);
-    }
-    
+        clearTimeout(this.timerId);
+    }   
 } 
 
 document.addEventListener('DOMContentLoaded', () => {

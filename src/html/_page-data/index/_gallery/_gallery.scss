@@ -33,6 +33,10 @@
             background-position: 50% 15%;
         }
 
+        &:not(:first-child) {
+            opacity: 0;
+        }
+
         &:nth-child(1) {
             background-image: url('./assets/img/slide1.jpg');
         }
