@@ -28,6 +28,7 @@
         background-repeat: no-repeat;
         background-position: 50% 0;
         background-size: cover;
+        transition: opacity 0.3s linear;
 
         @media screen and (min-width: $rs-sm-px) and (max-height: $rs-sm-px) {
             background-position: 50% 15%;

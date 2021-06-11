@@ -15,7 +15,7 @@ class Gallery {
                     if(record[0].target.classList.contains('open')) {
                         this.stop();
                     } else {                        
-                        this.play()
+                        this.play();
                     }
                 });
                 this.observer.observe(this.menu, {
@@ -31,7 +31,7 @@ class Gallery {
         }
     }
 
-    play() {      
+    play() {    
         function changeScene(gallery) {
             gallery.nextSceneNo = gallery.currentSceneNo + 1;
             if(gallery.nextSceneNo >= gallery.scenes.length) gallery.nextSceneNo = 0;
@@ -43,11 +43,10 @@ class Gallery {
             gallery.indicators[gallery.nextSceneNo].classList.add('active');
 
             gallery.currentSceneNo = gallery.nextSceneNo;
-        }       
+        }  
         
-        this.timerId = setTimeout(() => {
+        this.timerId = setInterval(() => {
             changeScene(this);
-            this.play();
         }, this.timing);
     }
 
