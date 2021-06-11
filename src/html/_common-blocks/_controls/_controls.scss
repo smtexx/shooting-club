@@ -58,7 +58,7 @@
         font-size: 2rem; 
         text-transform: none;
         background-color: var(--co-bg-black);  
-        border-top: 2px solid var(--co-lines-grey);         
+        border-top: 2px solid var(--co-lines-grey);                
         
         @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
             display: block;

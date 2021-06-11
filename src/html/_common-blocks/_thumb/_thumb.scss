@@ -1,0 +1,53 @@
+.thumb {    
+    @extend %t-hover;   
+
+    display: grid;
+    grid-template: 1fr auto auto / auto;    
+    max-width: 300px;    
+    font-family: $ff-osv;
+    font-size: 2rem;
+    color: var(--co-main-white);  
+    border-left: 3px solid var(--co-main-orange); 
+
+    &__image {        
+        width: 100%;        
+        height: auto;
+        grid-row: 1 / 4;
+        grid-column: 1 / 2;              
+    }
+
+    &__header {
+        @extend %t-hover;   
+
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+        padding: 0 var(--in-mobile-sides);        
+        text-transform: uppercase;
+        z-index: 10;
+    }
+
+    &__description {
+        @extend %t-hover;   
+
+        grid-row: 3 / 4;
+        grid-column: 1 / 2;
+        padding: 0.4em var(--in-mobile-sides) 1em calc(var(--in-mobile-sides) * 2);
+        font-size: 0.725em;
+        color: var(--co-main-orange);
+        z-index: 10;
+    }
+
+    @media(hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: scale(1.05);
+
+            & .thumb__header {                
+                transform: translateY(1.25em);
+            }
+
+            & .thumb__description {                
+                transform: translateY(-1.25em);
+            }
+        }
+    }  
+}

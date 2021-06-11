@@ -58,7 +58,9 @@ class Controls {
 }
 
 // Controls initiation
-new Controls(
-    document.getElementById('nav-burger'),
-    document.getElementById('nav-menu')   
-);
+document.addEventListener('DOMContentLoaded', () => {
+    new Controls(
+        document.getElementById('nav-burger'),
+        document.getElementById('nav-menu')   
+    );    
+});

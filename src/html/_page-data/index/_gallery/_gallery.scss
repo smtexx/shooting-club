@@ -29,6 +29,10 @@
         background-position: 50% 0;
         background-size: cover;
 
+        @media screen and (min-width: $rs-sm-px) and (max-height: $rs-sm-px) {
+            background-position: 50% 15%;
+        }
+
         &:nth-child(1) {
             background-image: url('./assets/img/slide1.jpg');
         }
@@ -46,7 +50,8 @@
         z-index: 5;
         padding: 0 var(--in-mobile-sides);
         font-size: 50px;
-        text-transform: uppercase;     
+        text-transform: uppercase;   
+        text-shadow: 0 0 15px black;  
         
         @media screen and (min-width: $rs-sm-px) {
             font-size: 64px;
@@ -70,7 +75,13 @@
         z-index: 5;
         font-size: 28px;
         text-align: right;
-        color: var(--co-main-orange);
+        color: var(--co-main-orange);    
+        text-shadow: 0 0 15px black;      
+
+        @media screen and (min-width: $rs-sm-px) {
+            font-size: 32px;
+            text-align: center;
+        }
 
         @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {            
             font-size: responsiveSize(28, 56, $rs-md, $rs-lg);
@@ -99,16 +110,20 @@
         grid-row: 4 / 5;
         grid-column: 1 / 2;
         display: none;
+        margin-top: 20px;
+        padding: 0 var(--in-mobile-sides);
+        z-index: 5;
 
         @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
             display: grid;
             grid-auto-flow: column;
             grid-gap: var(--in-between-column);
-            justify-content: space-around;
+            justify-content: space-between;
         }
 
         @media screen and (min-width: $rs-lg-px) {
-            margin: 0 var(--in-desc-sides);
+            margin: 30px var(--in-desc-sides);
+            padding: 0;
         }
     }
 
@@ -121,7 +136,11 @@
         justify-content: start;
         padding: 24px var(--in-mobile-sides); 
         font-size: 0.8rem;
-        z-index: 5;        
+        z-index: 5;       
+        
+        @media screen and (min-width: $rs-md-px) {
+            justify-content: center;
+        }
         
         span {            
             height: 1em; 

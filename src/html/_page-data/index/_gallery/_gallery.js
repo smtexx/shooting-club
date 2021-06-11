@@ -1,26 +1,30 @@
-class HeaderGallery {
-    constructor() {
+class Gallery {
+    constructor(gallery, menu) {
         try {
-            this.gallery = document.getElementById('header-gallery');
+            this.gallery = gallery;
+            this.menu = menu;
+
             this.holder = this.gallery.querySelector('.gallery__holder')
             this.scenes = this.holder.querySelectorAll('.gallery__scene');
             this.indicators = this.gallery.querySelectorAll('.gallery__indicator span');
-            this.timing = +this.gallery.dataset.timing;
-            this.menu = document.getElementById('nav-menu');
+            this.timing = +this.gallery.dataset.timing;            
     
-            this.observer = new MutationObserver(record => {            
-                if(record[0].target.classList.contains('open')) {
-                    this.stop();
-                } else {
-                    this.play();
-                }
-            });
-            this.observer.observe(this.menu, {
-                attributes: true,
-                attributeFilter: ['class']            
-            });
+            if(this.menu) {
+                this.observer = new MutationObserver(record => {            
+                    if(record[0].target.classList.contains('open')) {
+                        this.stop();
+                    } else {
+                        this.play();
+                    }
+                });
+                this.observer.observe(this.menu, {
+                    attributes: true,
+                    attributeFilter: ['class']            
+                });
+            }
             
             this.play();
+
         } catch (error) {
             console.log(error.message);
         }
@@ -56,10 +60,10 @@ class HeaderGallery {
     
 } 
 
-if(document.getElementById('header-gallery')) {    
-    document.addEventListener('readystatechange', () => {
-        if(document.readyState == 'complete') {
-            new HeaderGallery();
-        }
-    });
-}
+document.addEventListener('DOMContentLoaded', () => {
+    new Gallery(
+        document.getElementById('header-gallery'),
+        document.getElementById('nav-menu')
+    );
+});
+
