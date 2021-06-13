@@ -1,0 +1,46 @@
+.content {
+    @extend %content;
+
+    &__header {
+        @extend %f-content-header;
+        @extend %d-wide;
+    }
+
+    &__subheader {
+        @extend %f-content-subheader;
+    }
+
+    &__text {
+        @extend %f-main-text;   
+        
+        &:last-child {
+            @extend %d-wide;
+        }
+    } 
+
+    &__schedule {       
+        font-size: 1.6rem;  
+        font-family: $ff-osv;      
+        border-collapse: collapse;
+
+        td {
+            padding: 1em 0.5em;
+            border: 1px solid var(--co-lines-grey);
+            color: var(--co-main-orange);
+
+            span {
+                display: inline-block;
+                padding-left: 1em;
+                color: #545051;
+            }
+
+            &:first-child {
+                color: var(--co-main-white);
+            }            
+        }        
+        
+        tr:nth-child(odd) {
+            background-color: var(--co-bg-light-grey);
+        }
+    }
+}

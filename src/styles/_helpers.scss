@@ -16,16 +16,28 @@ $rs-lg-px: $rs-lg * 1px;
 $rs-xlg-px: $rs-xlg * 1px;
 
 // Fonts 
-%f-content-header {
+%f-content-headings {
     font-family: $ff-osv;
-    font-size: var(--fz-content-header);
-    color: var(--co-main-white);
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+%f-content-header {
+    @extend %f-content-headings;    
+    font-size: var(--fz-content-header);   
+    color: var(--co-main-white);   
+}
+
+%f-content-subheader {
+    @extend %f-content-headings;    
+    font-size: var(--fz-main-text);   
+    color: var(--co-main-orange);  
 }
 
 %f-main-text {
     font-family: $ff-rc;
     font-size: var(--fz-main-text);
-    color: var(--co-text-grey);    
+    color: var(--co-text-grey);      
 }
 
 // Delimiters
@@ -34,7 +46,7 @@ $rs-xlg-px: $rs-xlg * 1px;
     border-bottom: 3px solid var(--co-lines-grey);
 }
 
-%d-narrow {
+%d-narrow {   
     padding-bottom: var(--in-delimiter-narrow);
     border-bottom: 2px solid var(--co-lines-grey);
 }
@@ -42,4 +54,13 @@ $rs-xlg-px: $rs-xlg * 1px;
 // Transitions
 %t-hover {
     transition: all 0.2s ease-in-out;
+}
+
+// Blocks
+%content {
+    display: grid;
+    grid-gap: var(--in-between-blocks);
+    margin-top: var(--in-between-sections);
+    padding: 0 var(--in-mobile-sides);
+    color: var(--co-main-white);
 }

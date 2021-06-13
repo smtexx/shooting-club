@@ -1,4 +1,4 @@
-//Basics
+// Basics
 @import './styles/fonts';
 @import './styles/helpers';
 @import './styles/props';
@@ -8,8 +8,12 @@
 @import './styles/reset';
 @import './styles/layouts';
 
-//Pages & Blocks
-@import './html/_page-data/index/index.scss';
+// Common blocks
 @import './html/_common-blocks/_controls/controls';
-@import './html/_page-data/index/_gallery/gallery';
 @import './html/_common-blocks/_thumb/thumb';
+@import './html/_common-blocks/_news/news';
+
+// Pages 
+// Index
+@import './html/_page-data/index/index.scss';
+@import './html/_page-data/index/_gallery/gallery';

@@ -1,0 +1,10 @@
+@import './_news-block/news-block';
+
+.news {
+    @extend %content;
+
+    &__header {
+        @extend %f-content-header;
+        @extend %d-wide;
+    }
+}
