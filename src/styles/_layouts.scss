@@ -1,7 +1,3 @@
-:root {
-    --menuActivated: #{$rs-md};
-}
-
 body {
     background-image: url('./assets/img/body-bg.gif');
     background-repeat: repeat;
@@ -13,4 +9,17 @@ body {
     margin: 0 auto;
     display: grid;
     background-color: var(--co-bg-dark-grey);
+}
+
+.main-wrapper {
+    @media screen and (min-width: $rs-md-px) {
+        display: grid;
+        grid-template: auto / minmax(388px, 66.7%) minmax(380px, 33.3%);
+        align-items: start;
+    }
+
+    @media screen and (min-width: $rs-lg-px) {
+        grid-column-gap: var(--in-between-column);
+        margin: 0 var(--in-desc-sides);
+    }
 }

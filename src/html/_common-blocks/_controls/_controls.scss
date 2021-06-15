@@ -49,7 +49,7 @@
 
     &__navigation {
         display: none;
-        position: absolute;
+        position: fixed;
         top: 6.4rem;
         left: 0;
         right: 0;
@@ -58,7 +58,8 @@
         font-size: 2rem; 
         text-transform: none;
         background-color: var(--co-bg-black);  
-        border-top: 2px solid var(--co-lines-grey);                
+        border-top: 2px solid var(--co-lines-grey);
+        overflow-y: auto;
         
         @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
             display: block;
@@ -68,6 +69,7 @@
             font-size: 1.8rem;    
             border-top: none;
             text-transform: uppercase;
+            overflow-y: visible;
         }
 
         @media screen and (min-width: $rs-lg-px) {
@@ -81,7 +83,7 @@
 
         ul {
             display: grid;
-            grid-gap: 16px;
+            grid-gap: 16px;           
 
             @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {
                 grid-auto-flow: column;

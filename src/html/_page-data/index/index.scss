@@ -1,5 +1,6 @@
 .content {
-    @extend %content;
+    @extend %content;      
+    grid-column: 1 / 2;   
 
     &__header {
         @extend %f-content-header;
@@ -11,11 +12,7 @@
     }
 
     &__text {
-        @extend %f-main-text;   
-        
-        &:last-child {
-            @extend %d-wide;
-        }
+        @extend %f-main-text;
     } 
 
     &__schedule {       

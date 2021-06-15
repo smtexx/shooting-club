@@ -1,5 +1,5 @@
 :root {
-    font-size: 10px;
+    font-size: 10px;    
 
     // Colors
     --co-bg-black: #010101;
@@ -20,7 +20,14 @@
     --in-mobile-sides: 20px;
     --in-delimiter-wide: 22px;
     --in-delimiter-narrow: 18px;    
-    --in-between-column: 20px;
+    --in-between-column: 30px;
     --in-between-blocks: 18px;
     --in-between-sections: 35px;
+
+        
+    @media screen and (min-width: $rs-lg-px) {
+        --fz-main-text: 1.4rem;
+        --in-between-column: 60px;
+    }
 }
+

@@ -1,5 +1,8 @@
 .news-block {
-    @extend %d-narrow;
+    
+    &:not(:last-child) {
+        @extend %d-narrow;
+    }
 
     display: grid;
     grid-template: auto auto 1fr / max-content 1fr;
