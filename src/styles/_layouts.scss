@@ -11,7 +11,8 @@ body {
     background-color: var(--co-bg-dark-grey);
 }
 
-.main-wrapper {
+.main-wrapper {   
+
     @media screen and (min-width: $rs-md-px) {
         display: grid;
         grid-template: auto / minmax(388px, 66.7%) minmax(380px, 33.3%);
