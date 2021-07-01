@@ -18,11 +18,11 @@
         grid-auto-flow: column;
         justify-content: space-between;
         grid-gap: var(--in-between-column);
-        margin: 300px 0 20px;
+        margin: 250px 0 20px;
         padding: 0 20px;
 
         @media screen and (min-width: $rs-lg-px) {
-            margin: 300px var(--in-desc-sides) 20px;
+            margin: 250px var(--in-desc-sides) 20px;
             padding: 0;
         }
     }
