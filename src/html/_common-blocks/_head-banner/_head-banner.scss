@@ -1,0 +1,29 @@
+.head-banner {    
+    display: none;
+
+    @media screen and (min-width: #{$rs-md-px + 1px}) and (min-height: #{$rs-sm-px + 1px}) {        
+        display: grid;
+        margin-top: 6rem;
+        background-image: url('./assets/img/slide1.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    @media screen and (min-width: $rs-lg-px) {
+        margin-top: 0;
+    }
+
+    &__thumbs {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+        grid-gap: var(--in-between-column);
+        margin: 300px 0 20px;
+        padding: 0 20px;
+
+        @media screen and (min-width: $rs-lg-px) {
+            margin: 300px var(--in-desc-sides) 20px;
+            padding: 0;
+        }
+    }
+}

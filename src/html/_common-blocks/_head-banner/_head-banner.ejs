@@ -1,0 +1,22 @@
+<div class="head-banner">
+    <div class="head-banner__thumbs">
+        <%- include('../_thumb/_thumb.ejs', {
+            page: './about.html',
+            imageLink: '../assets/img/about.jpg',
+            header: 'О клубе',
+            description: 'как все начиналось'
+        }) %>      
+        <%- include('../_thumb/_thumb.ejs', {
+            page: './tournaments.html',
+            imageLink: '../assets/img/tournaments.jpg',
+            header: 'Турниры',
+            description: 'стань лучшим'
+        }) %>
+        <%- include('../_thumb/_thumb.ejs', {
+            page: './maps.html',
+            imageLink: '../assets/img/maps.jpg',
+            header: 'Локации',
+            description: 'места сражений'
+        }) %>  
+    </div>
+</div>
