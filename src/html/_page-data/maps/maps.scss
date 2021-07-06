@@ -1,0 +1,36 @@
+.maps-section {
+    &__img {
+        margin: 0 auto;
+    }
+
+    &__list {     
+        display: grid;
+        grid-row-gap: 1rem;       
+    }
+
+    &__list-item {
+        @extend %f-main-text; 
+
+        position: relative;
+        margin-left: 2em;
+        line-height: 1.5;      
+        
+        span {
+            text-transform: uppercase;
+            color: var(--co-main-orange);
+
+            &:before {
+                content: '';  
+                position: absolute;
+                left: -2em;
+                top: 0.5em;          
+                width: 1em;
+                height: 1em;                
+                background-image: url('./assets/img/bullet-icon.png');
+                background-repeat: no-repeat;
+                background-size: contain;                
+            }
+        }
+
+    }
+}

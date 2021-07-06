@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <%- include('./_common-blocks/_head/_head.ejs', {      
+            title: 'ShootingClub - Оружие и Локации', 
+            description: 'Поля сражений и арсенал нашего клуба, маркеры, амуниция для пейнтбола'}); %>
+    </head>
+    <body>
+        <div class="primary-wrapper">
+            <%- include('./_common-blocks/_controls/_controls.ejs') %>  
+            <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                     
+            <main class="main-wrapper">
+                <section class="content maps-section"> 
+                    <h2 class="content__header">Арсенал</h2>
+                    <h3 class="content__subheader">Выбери свое оружие</h3>
+
+                    <img src="../assets/img/gun.jpg" alt="Маркер для пейнтбола" class="maps-section__img">
+                    <p class="content__text">
+                        Твое оружие это продолжение тебя. Понятно что оно должно быть точным и скорострельным,
+                        кроме этого, оно должно быть удобным, надежным и прежде всего, наравиться владельцу.
+                        Поэтому подбор оружия осуществляется индивидуально!                      
+                    </p>
+                    <p class="content__text">
+                        Наш арсенал состоит из следующих видов оружия:
+                    </p>
+                    <ul class="maps-section__list">
+                        <li class="maps-section__list-item"><span>снайперские винтовки</span> - высокая дальнобойность и точность, оптический прицел</li>
+                        <li class="maps-section__list-item"><span>штурмовые винтовки</span> - отличная скорострельность, удобство и надежность</li>
+                        <li class="maps-section__list-item"><span>пистолеты</span> - компактный размер, небольшой вес, возможность скрытого ношения</li>
+                        <li class="maps-section__list-item"><span>пиротехника</span> - широкий арсенал пиротехнических средств, гранаты, дымовые шашки и многое другое</li>
+                    </ul>
+
+                </section>
+
+                <section class="content maps-section">
+                    <h2 class="content__header">Локации</h2>
+                    <h3 class="content__subheader">Идеальные поля сражений</h3>
+                
+                    <img src="../assets/img/map.jpg" alt="Площадка для игры в пейнтболл" class="maps-section__img">
+                    <p class="content__text"> 
+                        Мы подготовили для Вас уникальные игровые зоны для игры в пейнтбол. Все игровые зоны 
+                        стилизованы в соответствии с разными тематиками. В строительстве игровых зон использованы 
+                        только безопасные материалы. На наших площадках ты не найдешь торчащих гвоздей и битого стекла.
+                        Безопасность прежде всего. Стилизация наших площадок обеспечивает полное погружение в игру!
+                    </p>
+                    <p class="content__text">
+                        На сегодняшний день мы можем предложить следующие игровые площадки:
+                    </p>
+                    <ul class="maps-section__list">
+                        <li class="maps-section__list-item"><span>городские джунгли</span> - полуразрушенные здания в точности как в городах боевых сражений</li>
+                        <li class="maps-section__list-item"><span>сибирские джунгли</span> - густой лесной массив с укрепленными огневыми позициями</li>
+                        <li class="maps-section__list-item"><span>штурмовая площадка</span> - городская улица, с искореженными автомобилями и баррикадами</li>                        
+                    </ul>
+
+                </section>
+                <%- include('./_common-blocks/_news/_news.ejs') %>
+            </main>
+            <%- include('./_common-blocks/_footer/_footer.ejs') %>
+        </div>
+    </body>
+</html> 
