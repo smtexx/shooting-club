@@ -1,0 +1,61 @@
+.tournament-card {  
+    position: relative;  
+    margin-bottom: 15px;
+    padding: 3.5rem var(--in-mobile-sides) 1.8rem;
+    border-right: 3px solid var(--co-main-orange);    
+    font-family: $ff-osv;
+    background-color: var(--co-bg-light-grey);
+    box-shadow: 0 0 15px 3px black;
+
+    $rs-small: '.rs-small';
+
+    &#{$rs-small} {
+        display: grid;
+        grid-template: repeat(2, auto) / auto 1fr;
+        padding: 0 var(--in-mobile-sides) 0 0;
+    }
+
+    &__img {
+        float: left;
+        margin-right: var(--in-between-blocks);
+
+        #{$rs-small} & {
+            grid-row: 1/3;
+            grid-column: 1/2;
+            float: none;
+        }
+    }
+
+    &__date {
+        position: absolute;
+        top: 0;
+        right: var(--in-mobile-sides);
+        padding: 0.5rem 1rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: black;
+        background-color: var(--co-main-orange);        
+    }
+
+    &__header {
+        font-size: 1.6rem;
+        font-weight: 700;
+
+        #{$rs-small} & {
+            grid-row: 1/2;
+            grid-column: 2/3;
+            margin-top: 1.5rem;
+        }
+    }
+
+    &__text {
+        @extend %f-main-text;
+        margin-top: 1.5rem;
+
+        #{$rs-small} & {
+            grid-row: 2/3;
+            grid-column: 2/3;
+            margin: 1.5rem 0;  
+        }
+    }
+}

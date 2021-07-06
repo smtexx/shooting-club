@@ -9,3 +9,4 @@ import './styles.scss';
 import './html/_common-blocks/_controls/_controls';
 import './html/_page-data/index/_gallery/_gallery';
 import './html/_common-blocks/_footer/_footer';
+import './html/_page-data/tournaments/_tournament-card/_tournament-card';

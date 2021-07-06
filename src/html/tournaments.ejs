@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <%- include('./_common-blocks/_head/_head.ejs', {      
+            title: 'ShootingClub - Турниры', 
+            description: 'Турниры и соревнования по пейнтболу, командная гонка с крутыми призами!'}); %>
+    </head>
+    <body>
+        <div class="primary-wrapper">
+            <%- include('./_common-blocks/_controls/_controls.ejs') %>  
+            <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                     
+            <main class="main-wrapper">
+                <section class="content"> 
+                    <h2 class="content__header">Турниры</h2>                  
+
+                    <h3 class="content__subheader">Ближайшие события</h3>
+                    <%- include('./_page-data/tournaments/_tournament-card/_tournament-card.ejs', {      
+                        imageLink: '../assets/img/tournaments-1.jpg',                        
+                        dateAtr: '2021-05-21T10:00:00+07:00',
+                        dateText: '21.05.2021-10:00',
+                        header: 'Турнир снайперов',
+                        text: 'Бесшумные и смертельно опасные, пришло время снайперов! Проводим снайперский турнир, море адреналина и убойные призы гарантированы.' }); %>   
+                    <%- include('./_page-data/tournaments/_tournament-card/_tournament-card.ejs', {      
+                        imageLink: '../assets/img/tournaments-2.jpg',                        
+                        dateAtr: '2021-05-28T09:00:00+07:00',
+                        dateText: '28.05.2021-09:00',
+                        header: 'Женский день',
+                        text: 'Что может быть прекраснее вооруженной дамы? Радость для глаз и непрерывный экшен! Принимайте участие и приходите посмотреть, будет жарко.' }); %>   
+                    <%- include('./_page-data/tournaments/_tournament-card/_tournament-card.ejs', {      
+                        imageLink: '../assets/img/tournaments-3.jpg',                        
+                        dateAtr: '2021-06-05T08:00:00+07:00',
+                        dateText: '21.06.2021-08:00',
+                        header: 'Стрельба без упора',
+                        text: 'В бою важна прежде всего меткость, объявляем турнир по стрельбе без упора на дальнюю дистанцию, кофеек, спокойная дружеская атмосфера и прицельная стрельба.' }); %>                        
+                    
+                    <h3 class="content__subheader">О турнирах</h3>   
+                    <p class="content__text"> 
+                        Каждое воскресение мы проводим турниры. Турнир - это прекрасная возможность продемонстрировать 
+                        как свое собственное мастерство, так и командный дух. По итогам турнира, рассчитывается рейтинг
+                        команд, который регулярно публикуется на нашем сайте. Быть в первых местах рейтинга команд - это
+                        почетно и престижно!
+                    </p>
+                    <p class="content__text">
+                        Всю организацию турнира мы берем на себя, а значит все будет первоклассно. Лучшее оружие и экипировка,
+                        зрелищность, и уникальные призы и награды. Наши турниры всегда собирают не только участников, но и 
+                        большое количество зрителей!
+                    </p>
+                    
+                </section>
+                <section class="content tournaments-section">
+                    <h2 class="content__header">Рейтинг лучших команд</h2>
+                    <h3 class="content__subheader">Наша доска почета</h3>
+
+                    <table class="tournaments-section__winners">
+                        <thead>
+                            <tr>
+                                <th>Место</th>
+                                <th>Команда</th>
+                                <th>Побед</th>
+                                <th>Поражений</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Ночные охотники</td>
+                                <td>18</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Миротворцы</td>
+                                <td>16</td>                                
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Динамит</td>
+                                <td>14</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Боевые товарищи</td>
+                                <td>12</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Смерч</td>
+                                <td>10</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Спартанцы</td>
+                                <td>8</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Ударная сила</td>
+                                <td>6</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Сильные духом</td>
+                                <td>4</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>                                
+                                <td>Адреналин</td>
+                                <td>2</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Бизоны</td>
+                                <td>0</td>
+                                <td>20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="content__text">
+                        * По итогам последних учтенных игр.
+                    </p>
+                </section>
+            </main>
+            <%- include('./_common-blocks/_footer/_footer.ejs') %>
+        </div>
+    </body>
+</html> 

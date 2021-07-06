@@ -55,10 +55,14 @@ class Gallery {
     }   
 } 
 
-document.addEventListener('DOMContentLoaded', () => {
-    new Gallery(
-        document.getElementById('header-gallery'),
-        document.getElementById('nav-menu')
-    );
-});
+let headerGallery = document.getElementById('header-gallery'); 
+if(headerGallery) {
+    document.addEventListener('DOMContentLoaded', () => {
+        new Gallery(
+            headerGallery,
+            document.getElementById('nav-menu')
+        );
+    });
+}
+
 
