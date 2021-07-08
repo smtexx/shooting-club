@@ -6,8 +6,10 @@ body {
 .primary-wrapper {
     position: relative;
     max-width: 1200px;
+    min-height: 100vh;
     margin: 0 auto;
     display: grid;
+    grid-template-rows: auto 1fr auto;
     background-color: var(--co-bg-dark-grey);
 }
 
