@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <%- include('./_common-blocks/_head/_head.ejs', {      
+            title: 'Наш альбом, самые яркие игровые моменты', 
+            description: 'Альбом фотографий самых интересных моментов пейнтбольных игр с ShootingClub'}); %>
+    </head>
+    <body>
+        <div class="primary-wrapper">
+            <%- include('./_common-blocks/_controls/_controls.ejs') %>  
+            <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                     
+            <main class="main-wrapper">
+                <section class="content photos"> 
+                    <h2 class="content__header">Фотогалерея</h2>
+                    <div class="photos__block">
+                        <h3 class="photos__subheader">Боевые действия</h3>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-1-mini.jpg',
+                            imageAlt: 'Прицельная стрельба стоя',
+                            imageTitle: 'Тактическая стрельба стоя во время игры',
+                            description: 'Прицельная стрельба стоя, приближаясь к врагу все ближе'
+                        }) %>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-2-mini.jpg',
+                            imageAlt: 'Игроки на боевой позиции',
+                            imageTitle: 'Готовы к штурму',
+                            description: 'Заняли позицю на готове, сейчас начнется экшен!'
+                        }) %>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-3-mini.jpg',
+                            imageAlt: 'Стрельба из засады',
+                            imageTitle: 'Стрельба из засады',
+                            description: 'Стрелять из за надежного укрытия, как то спокойней'
+                        }) %>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-4-mini.jpg',
+                            imageAlt: 'Игрок прикрывает боевого товарища',
+                            imageTitle: 'Я прикрою, бро',
+                            description: 'Готов? Вперед, я прикрою! Самая частая игровая ситуация.'
+                        }) %>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-5-mini.jpg',
+                            imageAlt: 'Стрельба по бегущему игроку',
+                            imageTitle: 'Бегущая мишень',
+                            description: 'Азарт стрельбы по убегающему противнику сложно передать.'
+                        }) %>
+
+                        <h3 class="photos__subheader">Арсенал</h3>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-6-mini.jpg',
+                            imageAlt: 'Оружие разложено перед боем',
+                            imageTitle: 'Стволы поданы!',
+                            description: 'Оружие разложено перед боем, все проверено и заряжено.'
+                        }) %>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-7-mini.jpg',
+                            imageAlt: 'Оружие на стойке в оружейной комнате',
+                            imageTitle: 'Оружейная комната',
+                            description: 'В оружейной комнате всегда царит идеальный порядок.'
+                        }) %>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-8-mini.jpg',
+                            imageAlt: 'Снайперская винтовка L96A1 на сошках',
+                            imageTitle: 'Винтовка готова к бою',
+                            description: 'Винтовка L96A1 - высокоточное и мощное оружие.'
+                        }) %>
+                        <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
+                            imageLink: '../assets/img/gallery/slide-9-mini.jpg',
+                            imageAlt: 'Снайперская винтовка SAR 12 на столе',
+                            imageTitle: 'Идеальный инструмент снайпера',
+                            description: 'Еще один образец прекрасного оружия, винтовка SAR 12'
+                        }) %>
+                    </div>                                       
+                </section>                 
+            </main>
+            <%- include('./_common-blocks/_footer/_footer.ejs') %>
+        </div>
+    </body>
+</html> 

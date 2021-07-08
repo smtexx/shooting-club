@@ -1,0 +1,24 @@
+.photos {
+    grid-column: 1 / 3;
+    
+    &__block {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, auto));        
+        grid-gap: var(--in-between-blocks);        
+        justify-items: center;
+
+        @media screen and (min-width: $rs-md-px) {
+            grid-template-columns: repeat(auto-fill, 200px);  
+        }
+    }
+
+    &__subheader {
+        @extend %f-content-subheader;
+
+        grid-column-start: 1;
+        grid-column-end: -1;
+        justify-self: start;
+    }
+}
+
+Добавить ширму для просмотра фото в режиме галереи в виде отдельного модуля

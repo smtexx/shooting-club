@@ -1,0 +1,32 @@
+.photo-card {
+    @extend %t-hover;
+
+    max-width: 200px;
+    background-color: var(--co-bg-light-grey);   
+    box-shadow: 0 0 2px var(--co-text-grey);
+    outline: 1px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+
+
+    &__img {
+        @extend %t-hover;
+        transform-origin: 50% 100%;
+    }
+    
+    &__caption {
+        @extend %f-main-text;
+
+        padding: 0.8rem;        
+    }
+
+    @media(hover: hover) and (pointer: fine) {
+        &:hover {            
+            outline: 1px solid var(--co-text-grey);
+        }
+
+        &:hover &__img {
+            transform: scale(1.1);
+        }
+    }
+}
