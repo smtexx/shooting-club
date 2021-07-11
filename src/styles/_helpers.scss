@@ -1,6 +1,7 @@
 // Fonts families
 $ff-osv: 'Oswald';
 $ff-rc: 'Roboto Condensed';
+$ff-fa: 'Font Awesome';
 
 // Resolutions
 $rs-xs: 480;
@@ -14,6 +15,13 @@ $rs-sm-px: $rs-sm * 1px;
 $rs-md-px: $rs-md * 1px; 
 $rs-lg-px: $rs-lg * 1px;
 $rs-xlg-px: $rs-xlg * 1px;
+
+// Helpers
+%h-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 // Fonts 
 %f-content-headings {

@@ -5,13 +5,13 @@
             title: 'Наш альбом, самые яркие игровые моменты', 
             description: 'Альбом фотографий самых интересных моментов пейнтбольных игр с ShootingClub'}); %>
     </head>
-    <body>
+    <body class="frozen">
         <div class="primary-wrapper">
             <%- include('./_common-blocks/_controls/_controls.ejs') %>  
             <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                     
             <main class="main-wrapper">
                 <section class="content photos"> 
-                    <h2 class="content__header">Фотогалерея</h2>
+                    <h2 class="content__header">Фотогалерея</h2>                                 
                     <div class="photos__block">
                         <h3 class="photos__subheader">Боевые действия</h3>
                         <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
@@ -75,5 +75,6 @@
             </main>
             <%- include('./_common-blocks/_footer/_footer.ejs') %>
         </div>
+        <%- include('./_page-data/photos/_photo-cover/_photo-cover.ejs') %> 
     </body>
 </html> 

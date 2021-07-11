@@ -26,8 +26,17 @@
 @font-face {
     font-family: 'Oswald';
     src: url('./assets/fonts/Oswald-Light.woff2') format('woff2'),
-        url('./assets/fonts/Oswald-Light.woff') format('woff');
+         url('./assets/fonts/Oswald-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'Material Icons';
+    src: url('./assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
+         url('./assets/fonts/MaterialIcons-Regular.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
