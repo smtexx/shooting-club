@@ -5,15 +5,15 @@
             title: 'Наш альбом, самые яркие игровые моменты', 
             description: 'Альбом фотографий самых интересных моментов пейнтбольных игр с ShootingClub'}); %>
     </head>
-    <body class="frozen">
+    <body>
         <div class="primary-wrapper">
             <%- include('./_common-blocks/_controls/_controls.ejs') %>  
-            <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                     
+            <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                       
             <main class="main-wrapper">
                 <section class="content photos"> 
-                    <h2 class="content__header">Фотогалерея</h2>                                 
+                    <h2 class="content__header">Фотогалерея</h2>                                          
                     <div class="photos__block">
-                        <h3 class="photos__subheader">Боевые действия</h3>
+                        <h3 class="photos__subheader">Боевые действия</h3>        
                         <%- include('./_page-data/photos/_photo-card/_photo-card.ejs', {
                             imageLink: '../assets/img/gallery/slide-1-mini.jpg',
                             imageAlt: 'Прицельная стрельба стоя',
