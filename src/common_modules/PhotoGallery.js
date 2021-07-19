@@ -48,34 +48,52 @@ export default class PhotoGallery {
         this.nextBtn.addEventListener('pointerdown', this.next);
         this.backBtn.addEventListener('pointerdown', this.back); 
         
-        // Создание объектов 
+        // Создание объектов keyframes
+        this.keyframes = {
+            zoomIn: [
+                {transform: 'scale(0.6)', opacity: 0},
+                {transform: 'scale(1)', opacity: 1},
+            ],
+            fadeIn: [
+                {opacity: 0},
+                {opacity: 1}
+            ],
+            fadeOut: [
+                {opacity: 1},
+                {opacity: 0}
+            ],
+            fadeOutIn: [                
+                {opacity: 1},
+                {opacity: 0},
+                {opacity: 1}
+            ]          
+        }
     }
 
     // Открытие галереи при нажатии на изображение
     openGallery(event) {
-        // Повесить ширму
-        this.loader.classList.add('open');
-
         // Определить индекс изображения
         const imgIndex = this.cardsCollection.indexOf(event.currentTarget);
 
         // Изменить слайд
         this.changeSlide(imgIndex);
 
-        // Открыть окно галереи
+        // Открыть окно галереи        
         this.gallery.classList.add('open');
-        document.body.classList.add('frozen');
+        this.gallery.animate(this.keyframes.zoomIn, {duration: 200});
+        this.onScrollFunc = window.onscroll;
+        this.freezeBody();        
     } 
 
-    // Установить слайд св определенным номером
-    changeSlide(index) {
+    // Установить слайд с определенным номером
+    changeSlide(index) {        
         // Проверить состяние ширмы на наличие класса ошибки и скорректировать его
         if(this.loader.classList.contains('error')) this.loader.classList.remove('error');
 
-        // Повесить ширму
-        this.loader.classList.add('open');
+        // Показать лоадер
+        this.showLoader();               
 
-        // Изменить ссылку основного изображения              
+        // Изменить ссылку основного изображения        
         this.mainImg.src = this.imgLinksArray[index][this.resolution];
 
         // Взять карточку соответствующего изображения из колекции
@@ -96,8 +114,11 @@ export default class PhotoGallery {
     // Закрыть галерею
     closeGallery() {
         // Закрыть окно галереи
-        this.gallery.classList.remove('open');
-        document.body.classList.remove('frozen');
+        this.gallery.animate(this.keyframes.fadeOut, {duration: 250})
+            .finished.then(() => {
+                this.gallery.classList.remove('open');
+                this.unFreezeBody();                
+            });        
     }
 
     // Следующий слайд
@@ -114,13 +135,43 @@ export default class PhotoGallery {
         this.changeSlide(prevIndex);
     }
 
+    // Функция показывающая лоадер
+    showLoader() {
+        this.loaderTimeoutId = setTimeout(() => {
+            this.loader.classList.add('open');
+            this.loader.animate(this.keyframes.fadeIn, {duration: 200})         
+        }, 500);
+    }
+
     // Метод срабатывает при загрузке основного изображения
     onImgLoad() {
-        this.loader.classList.remove('open');              
+        clearTimeout(this.loaderTimeoutId);
+        if(this.loader.classList.contains('open')) {
+            this.loaderTimeoutId = false;
+            this.loader.animate(this.keyframes.fadeOut, {duration: 200})
+                .finished.then(() => {
+                    this.loader.classList.remove('open');  
+                });
+        }
     }
 
     // Метод срабатывает при ошибке загрузки основного изображения
     onImgLoadError() {
         this.loader.classList.add('error');            
+    }
+    
+    // Заморозить прокрутку страницы
+    freezeBody() {
+        const offsetX = window.pageXOffset;
+        const offsetY = window.pageYOffset;
+
+        window.onscroll = () => {
+            window.scrollTo(offsetX, offsetY);
+        }
+    }
+
+    // Возобновить прокрутку страницы
+    unFreezeBody() {
+        window.onscroll = null;
     }
 }
