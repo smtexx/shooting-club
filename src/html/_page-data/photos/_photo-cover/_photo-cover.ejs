@@ -1,24 +1,22 @@
 <div class="photo-cover">    
     <div class="photo-cover__content"> 
+        <div class="photo-cover__slide" id="galleryLoader">
+            <img class="photo-cover__img" src="../assets/img/gallery/slide-cover.jpg">
+            <div class="photo-cover__loader">
+                <div class="cssload-loader">
+                    <div class="cssload-inner cssload-one"></div>
+                    <div class="cssload-inner cssload-two"></div>
+                    <div class="cssload-inner cssload-three"></div>
+                </div> 
+                <p class="photo-cover__loader-text">загрузка изображения...</p>
+                <p class="photo-cover__loader-error">ошибка загрузки изображения</p> 
+            </div>
+            <!-- <figcaption class="photo-cover__caption">Sample of text</figcaption> -->
+        </div>
+
         <button class="photo-cover__close material-icons mi-close"></button>
-        <img class="photo-cover__img-empty" src="../assets/img/gallery/slide-cover.jpg">        
-        <img class="photo-cover__img" src="../assets/img/gallery/slide-cover.jpg">                
-        <div class="photo-cover__panel">
-            <button class="photo-cover__back material-icons mi-back"></button>
-            <p class="photo-cover__caption">
-                Прицельная стрельба стоя, приближаясь к врагу все ближе
-            </p>
-            <button class="photo-cover__next material-icons mi-next"></button>
-        </div>
-        <div class="photo-cover__loader">
-            <p class="photo-cover__loader-text">загрузка изображения...</p>
-            <p class="photo-cover__loader-error">ошибка загрузки изображения :(</p>
-            <div class="cssload-loader">
-                <div class="cssload-inner cssload-one"></div>
-                <div class="cssload-inner cssload-two"></div>
-                <div class="cssload-inner cssload-three"></div>
-            </div>            
-        </div>
+        <button class="photo-cover__back material-icons mi-back"></button>
+        <button class="photo-cover__next material-icons mi-next"></button>
     </div>    
 </div>
 

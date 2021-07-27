@@ -19,18 +19,19 @@ import slide_8_1024 from '../../../../assets/img/gallery/slide-8-1024w.jpg';
 import slide_9_750 from '../../../../assets/img/gallery/slide-9-750w.jpg'; 
 import slide_9_1024 from '../../../../assets/img/gallery/slide-9-1024w.jpg'; 
 
-new PhotoGallery({
-    resolutions: [750, 1024], 
-    links: [
-        [slide_1_750, slide_1_1024],
-        [slide_2_750, slide_2_1024],
-        [slide_3_750, slide_3_1024],
-        [slide_4_750, slide_4_1024],
-        [slide_5_750, slide_5_1024],
-        [slide_6_750, slide_6_1024],
-        [slide_7_750, slide_7_1024],
-        [slide_8_750, slide_8_1024],
-        [slide_9_750, slide_9_1024]
-    ]
-});
-
+if(document.getElementById('galleryLoader')) {
+    new PhotoGallery({
+        resolutions: [750, 1024], 
+        links: [
+            [slide_1_750, slide_1_1024],
+            [slide_2_750, slide_2_1024],
+            [slide_3_750, slide_3_1024],
+            [slide_4_750, slide_4_1024],
+            [slide_5_750, slide_5_1024],
+            [slide_6_750, slide_6_1024],
+            [slide_7_750, slide_7_1024],
+            [slide_8_750, slide_8_1024],
+            [slide_9_750, slide_9_1024]
+        ]
+    });
+}

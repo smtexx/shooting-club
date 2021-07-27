@@ -6,7 +6,7 @@
     bottom: 0;
     right: 0;
     align-items: flex-start;
-    background-color: var(--co-bg-black);
+    background-color: var(--co-bg-black-op);
     z-index: 1000000;
 
     @media screen and (min-width: $rs-xs-px) {
@@ -14,26 +14,25 @@
         justify-content: center;
     }
 
-    @media screen and (min-width: $rs-md-px) {
-        background-color: var(--co-bg-black-op);
-    }
-
     &.open {
         display: flex;
     }
 
     &__content {
-        position: relative;
-        display: grid;
-        box-shadow: 0 0 5px var(--co-text-grey);
+        position: relative; 
+        display: grid; 
 
         @media screen and (min-width: $rs-xs-px) {
             overflow: hidden;
         }
 
         button {
+            position: absolute;
+            padding: 0.3em; 
             font-size: 2.75rem;
             color: var(--co-main-orange);
+            text-shadow: 0 0 10px black;            
+            z-index: 50;
 
             @media screen and (min-width: $rs-md-px) {
                 font-size: 3.5rem;
@@ -41,95 +40,98 @@
         }
     }
 
-    &__close {
-        position: absolute;
-        top: 0.25em;
-        right: 0.25em;
-        padding: 0.25em;
-        text-shadow: 0 0 10px black;
-        z-index: 10;
-        background-color: #2c2c2c62;
-    }
-
-    &__back,
-    &__next {
-        padding: 0 0.5em;
-    }
-
-    &__img {
-        max-height: 100vh;
+    &__slide {
+        position: relative;     
         grid-row: 1/2;
-        grid-column: 1/2;
-        z-index: 3;
-
-        &-empty {
-            max-height: 100vh;
-            grid-row: 1/2;
-            grid-column: 1/2;            
-        }
-    }
-
-    &__panel {
-        position: absolute;
-        left: 0;
-        top: 100%;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        padding: 10px 0;
-        box-shadow: 0 0 5px var(--co-text-grey);
-        background-color: var(--co-bg-black-op);
-        z-index: 10;
-
-        @media screen and (min-width: $rs-xs-px) {
-            top: unset;
-            bottom: 0;
-            box-shadow: unset;
-        }
+        grid-column: 1/2;   
     }
 
     &__caption {
         @extend %f-main-text;
-        flex: 1 1 auto;        
-        font-size: 1.6rem;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin: 0 -1px;
+        padding: 8px var(--in-mobile-sides);              
+        background-color: var(--co-bg-light-grey);
+
+        @media screen and (min-width: $rs-xs-px) {
+            top: unset;
+            bottom: 0;
+            margin: 0;
+            border: none;
+            color: var(--co-main-white);  
+            background-color: #2c2c2c85;
+        }
     }
+
+    &__close {        
+        top: 0;
+        right: 0;        
+    }
+
+    &__back {
+        left: 0;  
+        bottom: 0;
+    }
+
+    &__next {
+        right: 0;   
+        bottom: 0;
+    }
+
+    &__back,
+    &__next {
+        @media screen and (min-width: $rs-xs-px) {
+            bottom: unset;
+            top: 65%;            
+        }
+
+        @media screen and (min-width: $rs-md-px) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    &__img {        
+        max-height: 100vh;        
+    }    
 
     &__loader {
         @extend %h-center;
 
-        display: none;
         position: absolute;
-        left: 0;
         top: 0;
-        bottom: 0;
+        left: 0;
         right: 0;
-        background-color: var(--co-bg-black);
-        z-index: 5;
-
-        &.open {
-            display: flex;
-        }
-    }
-
+        bottom: 0;     
+        z-index: 40;   
+        flex-direction: column;
+        border: 1px solid var(--co-lines-grey);
+    } 
+    
     &__loader-text,
-    &__loader-error {        
-        position: absolute;
-        top: 1.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 1.6rem;
-        font-family: $ff-osv;
+    &__loader-error {
+        @extend %f-main-text;
+        
+        margin-top: 2rem;
         color: var(--co-main-orange);
+
+        @media screen and (min-width: $rs-xs-px) {
+            margin-top: 3rem;
+        }
     }
 
     &__loader-error {
         display: none;        
     }
 
-    &__loader.error &__loader-error {
+    &__slide.error &__loader-error {
         display: block;
     }
-    &__loader.error &__loader-text {
+    &__slide.error &__loader-text {
         display: none;
     }
 }
@@ -137,9 +139,8 @@
 .cssload-loader {
     position: relative;    
     width: 100px;
-    height: 100px;
-    margin: 130px 0;
-    perspective: 780px;
+    height: 100px;    
+    perspective: 780px;    
 }
 
 .cssload-inner {
