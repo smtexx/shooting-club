@@ -13,28 +13,19 @@ export default class MessageForm {
         // Создать коллекцию объектов InputField для хранения некорректных полей
         this.wrongInputFields = new Set();
 
-        // Обернуть внутренние поля с классом input-element в InputWrapper   
-        this.form.querySelectorAll('.input-wrapper')
-            .forEach(inputWrapperBlock => {
-                // Создать объект InputWrapper и Извлечь ссылку на inputField объект
-                const inputField = (new InputWrapper(inputWrapperBlock)).inputField;                
-                // Если он обязателен и незаполнен добавить inputField в this.wrongInputObjects
-                if( inputField.input.required && inputField.status === STATUS_HOLDER.CLEAR) {
-                    this.wrongInputFields.add(inputField)
-                }                
-            }
-        );
-
         // Добавить сушатель событий изменения статуса полей ввода
         this.onInputStatusChange = this.onInputStatusChange.bind(this);
         this.form.addEventListener(
             InputField.EVENT_TYPE, this.onInputStatusChange
         );
 
-        // Установить исходный статус формы
-        this.updateStatus(
-            this.getStatus()
+        // Обернуть внутренние поля с классом input-element в InputWrapper   
+        this.form.querySelectorAll('.input-wrapper').forEach(
+            inputWrapperBlock => new InputWrapper(inputWrapperBlock)  
         );
+
+        // Установить исходный статус формы
+        this.updateStatus();
     }
 
     // Функция для проверки статуса формы
@@ -46,7 +37,9 @@ export default class MessageForm {
     }
 
     // Функция для обновления статуса формы
-    updateStatus(newStatus) {
+    updateStatus() {
+        // Получить новый статус
+        const newStatus = this.getStatus();
         // Вывести сообщение об ошибках в статус
         this.statusBlock.innerHTML = this.createErrorMessage();
         // Если статус не изменился - выйти из функции
@@ -70,6 +63,8 @@ export default class MessageForm {
         const clearFields = [];
         let message = '';
 
+        if(this.wrongInputFields.size === 0) return message;
+
         this.wrongInputFields.forEach(inputField => {
             const fieldName = inputField.input.dataset.name;
 
@@ -85,17 +80,18 @@ export default class MessageForm {
         }
 
         if(clearFields.length !== 0) {
-            message += `<br>Пустые поля: ${clearFields.join(', ')}`
+            if(message !== '') message += '<br>';
+            message += `Пустые поля: ${clearFields.join(', ')}`
         }
 
         return message;
     }
 
     onInputStatusChange(event) {
-        const {status, inputField} = event.detail; 
+        const inputField = event.detail.inputField; 
 
         // Изменить объект wrongInputFields в соответствии со статусом inputField
-        if(status === STATUS_HOLDER.OK) {
+        if(inputField.status === STATUS_HOLDER.OK) {
             if(!this.wrongInputFields.has(inputField)) return;
             this.wrongInputFields.delete(inputField);
         } else {
@@ -103,9 +99,7 @@ export default class MessageForm {
         }
 
         // Обновить статус формы        
-        this.updateStatus(
-            this.getStatus()
-        );
+        this.updateStatus();
     }
 
     onFormSubmit(event) {
@@ -133,8 +127,9 @@ class InputWrapper {
     };
 
     constructor(inputWrapper) {
-        // Сохранить ссылку на inputElement
+        // Сохранить ссылку на inputWrapper
         this.inputWrapper = inputWrapper;
+
         // Извлечь регулярное выражение из атрибута data-check-template
         const regExpString = inputWrapper.dataset.checkTemplate;
         // Если шаблон для проверки был предоставлен
@@ -147,8 +142,24 @@ class InputWrapper {
                 regExpBase.base, regExpBase.flags
             );
         }        
-        // Создать элемент InputField и сохранить на него ссылку
+
+        // Добавить слушатель для inputStatusChanged
+        this.onChangeStatus = this.onChangeStatus.bind(this);
+        inputWrapper.addEventListener(
+            InputField.EVENT_TYPE, this.onChangeStatus
+        );
+
+        // Найти элемент ввода внутри inputWrapper
         const input = inputWrapper.querySelector('input, textarea');
+
+        // Если поле для ввода обязательно, добавить соответствующий класс и свойство
+        if(input.required) {
+            inputWrapper.classList.add(
+                InputWrapper.CLASS_NAMES.REQUIRED
+            );  
+        }
+
+        // Создать элемент InputField и сохранить на него ссылку
         switch (input.name) {
             // Для телефонного поля
             case 'tel':
@@ -162,44 +173,43 @@ class InputWrapper {
                 );
                 break;
         }
-
-        // Если поле для ввода обязательно, добавить соответствующий класс и свойство
-        if(input.required) {
-            inputWrapper.classList.add(
-                InputWrapper.CLASS_NAMES.REQUIRED
-            );  
-        } 
-
-        // Добавить слушатель для inputStatusChanged
-        this.onChangeStatus = this.onChangeStatus.bind(this);
-        inputWrapper.addEventListener(
-            InputField.EVENT_TYPE, this.onChangeStatus
-        );
     }
 
     onChangeStatus(event) {
-        this.setStatus(event.detail.status);
+        this.updateStatus(event.detail.inputField.status);
     }
 
-    setStatus(status) {        
-        // Получить имена классов
-        const {ERROR, OK} = InputWrapper.CLASS_NAMES;
+    updateStatus(newStatus) {        
+        if(this.status === newStatus) return;
         
-        switch (status) {
+        switch (newStatus) {
             case STATUS_HOLDER.CLEAR:
-                this.inputWrapper.classList.remove(ERROR, OK);
+                this.inputWrapper.classList.remove(
+                    InputWrapper.CLASS_NAMES.ERROR,
+                    InputWrapper.CLASS_NAMES.OK
+                );
                 break;
 
             case STATUS_HOLDER.OK:
-                this.inputWrapper.classList.add(OK);
-                this.inputWrapper.classList.remove(ERROR);
+                this.inputWrapper.classList.add(
+                    InputWrapper.CLASS_NAMES.OK
+                );
+                this.inputWrapper.classList.remove(
+                    InputWrapper.CLASS_NAMES.ERROR
+                );
                 break;
 
             case STATUS_HOLDER.ERROR:
-                this.inputWrapper.classList.add(ERROR);
-                this.inputWrapper.classList.remove(OK);
+                this.inputWrapper.classList.add(
+                    InputWrapper.CLASS_NAMES.ERROR
+                );
+                this.inputWrapper.classList.remove(
+                    InputWrapper.CLASS_NAMES.OK
+                );
                 break;
         }
+
+        this.status = newStatus;
     }
 }
 
@@ -210,9 +220,7 @@ class InputField {
     
     constructor(input, checkTemplate) {
         // Ссылка на исходный input
-        this.input = input;
-        // Исходное состояние
-        this.status = STATUS_HOLDER.CLEAR;
+        this.input = input;        
 
         // УБРАТЬ this.status = STATUS_HOLDER.CLEAR 
         // СОЗДАТЬ ФУНКЦИЮ UPDETESTATUS, ВНУТРЬ НЕЕ ПОМЕСТИТЬ ВЫЗОВ
@@ -242,16 +250,14 @@ class InputField {
         if(this.checkTemplate) {
             this.onEdit = this.onEdit.bind(this);
             input.addEventListener('input', this.onEdit);
+            // Активировать проверку статуса
+            this.updateStatus();
         }
     }
 
-    onEdit(event) {
-        // Извлечь значение из input
-        const value = event.target.value;   
+    onEdit() {          
         // Изменить статус поля в соответствии с новым значением        
-        this.changeStatus(
-            this.defineStatus(value)
-        );
+        this.updateStatus();
     }
 
     defineStatus(value) {             
@@ -261,7 +267,8 @@ class InputField {
             STATUS_HOLDER.ERROR;            
     }
 
-    changeStatus(newStatus) {
+    updateStatus() {
+        const newStatus = this.defineStatus(this.input.value);
         // Если новый статус равен текущему, выйти из функции
         if(newStatus === this.status) return;
         // Иначе изменить свойство статуса
@@ -271,8 +278,7 @@ class InputField {
             new CustomEvent(InputField.EVENT_TYPE, {
                 bubbles: true,
                 detail: {
-                    inputField: this,
-                    status: newStatus
+                    inputField: this
                 }
             })
         );        
@@ -328,7 +334,7 @@ class InputFormattedField extends InputField {
     onBlur(event) {
         if(event.target.value.length <= this.prefix.length) {
             event.target.value = '';
-            this.changeStatus(STATUS_HOLDER.CLEAR);
+            this.updateStatus();
         }
     }
 
@@ -389,66 +395,3 @@ const STATUS_HOLDER = {
     ERROR: 'ERROR',
     CLEAR: 'CLEAR'
 }
-
-// class TelFieldV1 extends InputField {
-//     constructor(input) {
-//         super(input, /^\+7 \(\d{3}\) \d{3}(\p{Pd}\d{2}){2}$/);
-//         // Префикс номера
-//         this.prefix = '+7';
-//         // Шаблон, используемый для форматирования поля
-//         this.template = ' (???) ???-??-??';         
-//         // Регулярное выражение с допустимыми значениями
-//         this.allowedValues = /[\d]/;
-//     }
-
-//     // Переопределяем исходный метод
-//     onEdit(event) {
-//         // Извлечь значение из input
-//         const value = event.target.value;
-//         // Форматировать значение и установить его в поле
-//         this.input.value = this.formatValue(value);
-//         // Запустить исходный метод родительского классаэ
-//         super.onEdit(event);        
-//     }
-
-//     // Метод для форматирования значения по шаблону
-//     formatValue(value) {
-//         // Удалить из значения все пробельные символы
-//         const editableValue = value.replace(/\s/g, '');        
-//         // Если указан префикс, вернуть его при минимальном заполнении поля
-//         if( this.prefix && 
-//             value.length <= this.prefix.length ) {
-//             return this.prefix;
-//         } 
-//         // Выделить текстовую базу для редактирования и удалить все недопустимые и лишние символы     
-//         let base = editableValue
-//             .substring(this.prefix.length)
-//             .replace(/./g, symbol => 
-//                 this.allowedValues.test(symbol) ? symbol : ''
-//             );
-
-//         // Обрезать лишние символы если они есть 
-//         const maxInputLength = this.template.match(/\?/g).length;
-//         if(base.length > maxInputLength) {
-//             base = base.substring(0, maxInputLength);
-//         }       
-            
-//         // Заменить элементы шаблона значениями из base
-//         if(base.length > 0) {
-//             let counter = 0;
-//             return this.prefix + this.template.replace(/./g,
-//                 symbol => {
-//                     if(counter < base.length) {
-//                         return symbol === '?' ? base[counter++] : symbol;
-//                     }
-//                     return '';
-//                 }
-//             );
-//         } else {
-//             return this.prefix;
-//         }        
-//     }
-// }
-
-
-
