@@ -67,12 +67,12 @@ export default class PhotoGallery {
             ], 
             elasticNext: [
                 {transform: 'translateX(0)'},
-                {transform: 'translateX(-4%)'},                
+                {transform: 'translateX(-2%)'},                
                 {transform: 'translateX(0)'}
             ],
             elasticPrev: [
                 {transform: 'translateX(0)'},
-                {transform: 'translateX(4%)'},                
+                {transform: 'translateX(2%)'},                
                 {transform: 'translateX(0)'}
             ]        
         }

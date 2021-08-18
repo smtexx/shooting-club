@@ -1,0 +1,76 @@
+<form class="message-form error" id="messageForm" action="#" method="POST">
+    <fieldset class="message-form__contacts-fields">
+        <legend class="message-form__contacts-caption">
+            Контактные данные:
+        </legend>
+
+        <div class="message-form__inputs">
+            <label for="messageFormName">Ваше имя:</label>
+            <div class="input-wrapper">
+                <input  type="text" 
+                        id="messageFormName"
+                        placeholder="Имя:" 
+                        name="name" 
+                        tabindex="1" 
+                        data-name="имя"
+                        required>    
+                <span class="input-wrapper__checker material-icons"></span>                
+            </div>
+            <label for="messageFormEmail">Электронный адрес:</label>
+            <div class="input-wrapper">
+                <input  type="email" 
+                        id="messageFormEmail"
+                        placeholder="email@post.ru" 
+                        name="email" 
+                        tabindex="2"
+                        data-name="электронный адрес">   
+                <span class="input-wrapper__checker material-icons"></span>                
+            </div>
+            <label for="messageFormTel">Номер телефона:</label>
+            <div class="input-wrapper">
+                <input  type="tel" 
+                        id="messageFormTel"
+                        placeholder="+7 905 555 55 55" 
+                        name="tel" 
+                        tabindex="3" 
+                        data-name="номер телефона"
+                        required>
+                <span class="input-wrapper__checker material-icons"></span>                
+            </div>            
+        </div>         
+    </fieldset> 
+
+    <label class="message-form__message-label" for="messageFormMessage">Сообщение:</label>
+    <div class="input-wrapper top-checker">
+        <textarea   id="messageFormMessage"
+                    placeholder="Текст сообщения" 
+                    name="message" 
+                    tabindex="4" 
+                    rows="10"
+                    data-name="текст сообщения"
+                    required></textarea>        
+        <span class="input-wrapper__checker material-icons"></span>                
+    </div>
+
+
+    <p class="message-form__notice">
+        Поля помеченные <span>*</span> обязательны к заполнению.
+    </p>
+
+    <p class="message-form__error-message" id="messageFormStatusBlock"></p>
+
+    <div class="message-form__modal" id="messageFormModal">
+
+    </div>
+
+    <div class="message-form__controls">
+        <button class="message-form__button" 
+                type="reset" 
+                tabindex="5">Очистить</button>            
+        <button class="message-form__button" 
+                id="messageFormSubmitButton"
+                type="submit" 
+                tabindex="6" 
+                disabled>Отправить</button>
+    </div>
+</form>

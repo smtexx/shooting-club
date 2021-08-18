@@ -1,0 +1,35 @@
+.contacts {
+    grid-column: 2/3;
+
+    &__address {
+        @extend %f-main-text;
+
+        display: grid;
+        justify-content: start;
+        grid-gap: 1em;
+
+        span::before {
+            display: inline-block;
+            margin-right: 1em;
+            vertical-align: top;
+            line-height: 1.4;     
+            color: var(--co-main-orange);                  
+        }
+
+        a {
+            color: var(--co-main-white);
+
+            @media(hover: hover) and (pointer: fine) {
+                transition: all 0.2s ease-in-out;   
+    
+                &:hover {
+                    color: var(--co-main-orange);
+                }
+            }
+        }
+    }
+
+    &__organisation {
+        color: var(--co-main-orange);
+    }
+}

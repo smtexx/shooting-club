@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <%- include('./_common-blocks/_head/_head.ejs', {      
+            title: 'ShootingClub - связаться с нами.', 
+            description: 'Наш адрес и форма обратной связи'}); %>
+    </head>
+    <body>
+        <div class="primary-wrapper">
+            <%- include('./_common-blocks/_controls/_controls.ejs') %>  
+            <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                     
+            <main class="main-wrapper">
+                <section class="content">                     
+                    <h2 class="content__header">Написать нам:</h2> 
+                    <p class="content__text"> 
+                        По любым вопросам, Вы можете связаться с нами через форму обратной 
+                        связи ниже, после чего мы обязательно перезвоним. 
+                    </p>    
+                    <%- include('./_page-data/contacts/_message-form/_message-form.ejs') %>              
+                </section>
+
+                <section class="content contacts">
+                    <h2 class="content__header">Контакты</h2> 
+                    <address class="contacts__address">
+                        <p class="contacts__organisation">ООО "Стрелковый клуб"</p>
+                        <p class="contacts__location">
+                            630 000 Российская Федерация, <br>
+                            г. Новосибирск, ул. Боевая 25
+                        </p>
+                        <a href="mailto:message@shooting-club.ru">
+                            <span class="material-icons mi-mail"></span>message@shooting-club.ru
+                        </a>
+                        <a href="tel:+79055555555">
+                            <span class="material-icons mi-m-phone"></span>+7 905 555-55-55
+                        </a>
+                        <a href="tel:+73835555555">
+                            <span class="material-icons mi-s-phone"></span>+7 383 555-55-55
+                        </a>
+                    </address>
+                </section>                
+            </main>
+            <%- include('./_common-blocks/_footer/_footer.ejs') %>
+        </div>
+    </body>
+</html> 
