@@ -1,0 +1,51 @@
+.modal-window {
+    @extend %fullscreen;
+    @extend %h-center;
+
+    background-color: var(--co-bg-black-op);   
+    
+    &__window {
+        position: relative;
+        display: grid;                
+        grid-gap: 20px;
+        padding: 50px 30px 30px 30px;
+        background-color: var(--co-bg-black);
+        border: 1px solid var(--co-lines-grey);
+        border-left: 3px solid var(--co-main-orange);
+        box-shadow: 0 0 10px var(--co-bg-light-grey);
+    }
+
+    &__message {
+        color: var(--co-main-white);
+    }
+
+    &__icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 4rem;       
+    }
+
+    &__close {
+        padding: 0.5em 1em;
+        justify-self: center;
+        font-size: var(--fz-main-text);
+        font-family: $ff-osv;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: black;
+        background-color: var(--co-main-orange);   
+    }
+}
+
+.mi-status::before {
+    content: '\e86c';
+    display: block;
+    padding: 0.175em 0.15em;
+    font-size: 1em;
+    color: var(--co-status-ok);
+}
+.modal-window.error .mi-status::before {
+    content: '\e99a';
+    color: var(--co-status-err);
+}
