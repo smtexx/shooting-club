@@ -43,11 +43,11 @@
             transform: scale(1.05);
 
             & .thumb__header {                
-                transform: translateY(1.25em);
+                transform: translateY(1.5em);
             }
 
             & .thumb__description {                
-                transform: translateY(-1.25em);
+                transform: translateY(-1.5em);
             }
         }
     }  

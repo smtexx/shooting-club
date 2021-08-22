@@ -1,7 +1,8 @@
 import ResponsiveElement from '../../../../common_modules/ResponsiveElement';
 
 const options = [
-    {className: 'rs-small', minWidth: 510}      
+    {className: 'rs-xsmall', minWidth: 380},
+    {className: 'rs-small', minWidth: 560}     
 ];
 
 let tournamentCards = document.querySelectorAll('.tournament-card');

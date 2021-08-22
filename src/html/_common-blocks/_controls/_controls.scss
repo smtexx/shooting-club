@@ -24,7 +24,11 @@
 
     &__header {
         display: flex;
-        font-size: 3.2rem;
+        font-size: 2.9rem;
+
+        @media screen and (min-width: $rs-xs-px) {
+            font-size: 3.2rem;
+        }
 
         span {
             display: inline-block;

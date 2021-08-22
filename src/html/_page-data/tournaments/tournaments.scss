@@ -5,9 +5,13 @@
     }
 
     &__winners {       
-        font-size: 1.6rem;  
+        font-size: 1.4rem;  
         font-family: $ff-osv;      
         border-collapse: collapse;
+
+        @media screen and (min-width: $rs-xs-px) {
+            font-size: 1.6rem;
+        }
         
         td, th {
             padding: 1em 0.5em;
