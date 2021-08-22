@@ -1,3 +1,5 @@
+import scrollController from "./scrollController";
+
 export default class PhotoGallery {    
     
     // imgLinks: объект {resolutions: [750, 1024], links: [['slide-1-750w.jpg', 'slide-1-1024w.jpg']]}
@@ -242,17 +244,12 @@ export default class PhotoGallery {
     
     // Заморозить прокрутку страницы
     freezeBody() {
-        const offsetX = window.pageXOffset;
-        const offsetY = window.pageYOffset;
-
-        window.onscroll = () => {
-            window.scrollTo(offsetX, offsetY);
-        }
+        scrollController.freeze();
     }
 
     // Возобновить прокрутку страницы
     unFreezeBody() {
-        window.onscroll = null;
+        scrollController.unFreeze();
     }
 
     // Получить текущий слайд
