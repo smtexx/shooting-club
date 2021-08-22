@@ -1,31 +1,143 @@
+import STATUS_HOLDER from "./STATUS_HOLDER";
+import ModalWindow from "./ModalWindow";
+
 export default class MessageForm {
     constructor() {        
         // Сохранить ссылки на рабочие объекты
         // Форма
         this.form = document.getElementById('messageForm');
-        // Модальное окно
-        this.modal = document.getElementById('messageFormModal');
         // Блок текстовых сообщений статуса формы
         this.statusBlock = document.getElementById('messageFormStatusBlock');  
         // Кнопка отправки формы
         this.submit = document.getElementById('messageFormSubmitButton'); 
+        // Поля с содержимым, подлежащем очистке при отправке формы
+        this.messageFields = [
+            document.getElementById('messageFormMessage')
+        ];        
+
+        // Модальное окно
+        this.modal = new ModalWindow('modalWindow');
+        // Сообщения модального окна, показываемого при отправке формы
+        this.modalMessages = {
+            sendingError: 'К сожалению, не удалось отправить сообщение, попробуйте позже.',
+            sended: 'Сообщение отправлено, благодарим Вас за обратную связь!',
+            cleared: 'Поля формы очищены!',
+            sending: 'Отправка сообщения...'
+        };
 
         // Создать коллекцию объектов InputField для хранения некорректных полей
         this.wrongInputFields = new Set();
 
         // Добавить сушатель событий изменения статуса полей ввода
-        this.onInputStatusChange = this.onInputStatusChange.bind(this);
-        this.form.addEventListener(
-            InputField.EVENT_TYPE, this.onInputStatusChange
-        );
+        this.handleInputStatusChange = this.handleInputStatusChange.bind(this);
+        this.form.addEventListener(InputField.EVENT_TYPE, this.handleInputStatusChange);
+
+        // Добавить слушатель очистки формы
+        this.handleFormReset = this.handleFormReset.bind(this);
+        this.form.addEventListener('reset', this.handleFormReset);
+
+        // Добавить слушатель отправки формы
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.form.addEventListener('submit', this.handleFormSubmit);
 
         // Обернуть внутренние поля с классом input-element в InputWrapper   
-        this.form.querySelectorAll('.input-wrapper').forEach(
-            inputWrapperBlock => new InputWrapper(inputWrapperBlock)  
-        );
+        this.formFields = [...this.form.querySelectorAll('.input-wrapper')]
+            .map(inputWrapperBlock => new InputWrapper(inputWrapperBlock));
 
         // Установить исходный статус формы
         this.updateStatus();
+    }
+
+    // Обработка события сброса формы
+    handleFormReset(event) {
+        // Отменить действие по умолчанию
+        event.preventDefault();        
+        // Обработать очистку полей
+        this.formFields.forEach(inputWrapper => {            
+            inputWrapper.inputField.input.value = '';
+            // При очистке отслеживаемого поля, обновить статус
+            if(inputWrapper.inputField.taracked) {
+                inputWrapper.inputField.updateStatus();
+            }
+        });
+        // Открыть модальное окно с сообщением
+        this.modal.open(
+            STATUS_HOLDER.OK,
+            this.modalMessages.cleared
+        );
+    }
+    
+    // Обработка события изменения статуса полей формы
+    handleInputStatusChange(event) {
+        const inputField = event.detail.inputField;
+        const {required, status} = inputField;        
+
+        // Удалить поле из wrongInputFields при условиях
+        if( status === STATUS_HOLDER.OK || (
+            status === STATUS_HOLDER.CLEAR && !required
+        )) {
+            if(!this.wrongInputFields.has(inputField)) return;
+            this.wrongInputFields.delete(inputField);
+        } 
+
+        // Добавить поле в wrongInputFields при условиях
+        if( status === STATUS_HOLDER.ERROR || (
+            status === STATUS_HOLDER.CLEAR && required
+        )) {
+            if(this.wrongInputFields.has(inputField)) return;
+            this.wrongInputFields.add(inputField);
+        }        
+
+        // Обновить статус формы        
+        this.updateStatus();
+    }
+
+    // Обработка события отправки формы
+    async handleFormSubmit(event) {
+        event.preventDefault();
+
+        const address = this.form.getAttribute('action');
+        const method = this.form.getAttribute('method');        
+        
+        try {
+            // Вывести окно ожидания отправки
+            this.modal.open(
+                STATUS_HOLDER.LOADING,
+                this.modalMessages.sending
+            );
+
+            // Искуственная задержка
+            await new Promise(resolve => setTimeout(
+                () => resolve(), 1500
+            ))
+
+            const response = await fetch(address, {
+                method,
+                body: new FormData(this.form) 
+            });
+
+            if(!response.ok) {
+                throw new Error(`Message sending error, status code: ${response.status}`);
+            }
+
+            // Очистить поля с сообщениями
+            this.messageFields.forEach(field => {
+                field.value = '';
+                field.dispatchEvent(new InputEvent('input'));
+            });
+    
+            // Обновить модальное окно на OK
+            this.modal.setStatus(STATUS_HOLDER.OK);
+            this.modal.setMessage(this.modalMessages.sended);
+            
+        } catch (error) {
+            console.log(error.message);
+            
+            // Обновить модальное окно на ERROR
+            this.modal.setStatus(STATUS_HOLDER.ERROR);
+            this.modal.setMessage(this.modalMessages.sendingError);
+        }        
+
     }
 
     // Функция для проверки статуса формы
@@ -58,6 +170,7 @@ export default class MessageForm {
         this.status = newStatus;        
     }
 
+    // Функция создания сообщения об ошибке
     createErrorMessage() {
         const wrongFields = [];
         const clearFields = [];
@@ -86,33 +199,6 @@ export default class MessageForm {
 
         return message;
     }
-
-    onInputStatusChange(event) {
-        const inputField = event.detail.inputField; 
-
-        // Изменить объект wrongInputFields в соответствии со статусом inputField
-        if(inputField.status === STATUS_HOLDER.OK) {
-            if(!this.wrongInputFields.has(inputField)) return;
-            this.wrongInputFields.delete(inputField);
-        } else {
-            this.wrongInputFields.add(inputField);
-        }
-
-        // Обновить статус формы        
-        this.updateStatus();
-    }
-
-    onFormSubmit(event) {
-
-    }
-
-    showModal() {
-        this.modal.classList.add('open');
-    }
-
-    closeModal() {
-        this.modal.classList.remove('open');
-    } 
 }
 
 class InputWrapper {    
@@ -144,9 +230,9 @@ class InputWrapper {
         }        
 
         // Добавить слушатель для inputStatusChanged
-        this.onChangeStatus = this.onChangeStatus.bind(this);
+        this.handleChangeStatus = this.handleChangeStatus.bind(this);
         inputWrapper.addEventListener(
-            InputField.EVENT_TYPE, this.onChangeStatus
+            InputField.EVENT_TYPE, this.handleChangeStatus
         );
 
         // Найти элемент ввода внутри inputWrapper
@@ -166,6 +252,10 @@ class InputWrapper {
                 this.inputField = new TelField(input);                
                 break;
 
+            // Для полей email
+            case 'email':
+                this.inputField = new EmailField(input);
+
             // Для всех прочих полей
             default:
                 this.inputField = new InputField(
@@ -175,7 +265,7 @@ class InputWrapper {
         }
     }
 
-    onChangeStatus(event) {
+    handleChangeStatus(event) {
         this.updateStatus(event.detail.inputField.status);
     }
 
@@ -220,48 +310,36 @@ class InputField {
     
     constructor(input, checkTemplate) {
         // Ссылка на исходный input
-        this.input = input;        
+        this.input = input; 
 
-        // УБРАТЬ this.status = STATUS_HOLDER.CLEAR 
-        // СОЗДАТЬ ФУНКЦИЮ UPDETESTATUS, ВНУТРЬ НЕЕ ПОМЕСТИТЬ ВЫЗОВ
-        // DEFINESTATUS - АНАЛОГИЧНО СДЕЛАТЬ НА КЛАССЕ формы
+        // Добавить свойство required
+        this.required = input.required ? true : false;         
 
-        // В КОНЦЕ КОНСТРУКТОРА, ВЫЗВАТЬ UPDATESTATUS 
-        // ПОСЛЕ ЧЕГО ВОСХОДЯЩЕЕ СОБЫТИЕ ОБРАБОТАЕТСЯ В MESSAGEFORM 
-        // И INPUTwRAPPER
-
-        // ДЛЯ ЭТОГО ДОБАВИТЬ ОБРАБОТЧИКИ СОБЫТИЯ В MESSAGEFORM 
-        // И INPUTwRAPPER ПЕРЕД!!! СОЗДАНИЕМ InputField
-
-        // ДАЛЕЕ ЗАНЯТЬСЯ ПРОВЕРКОЙ ПОЛЯ EMAIL И ВЫЗОВОМ
-        // МОДАЛЬНОГО ОКНА ПРИ ОТПРАВКЕ ФОРМЫ!
         // Если передан шаблон, сохранить ссылку на него
         if(checkTemplate) {
             this.checkTemplate = checkTemplate;
         }
-        
-        // Если шаблон не передан, но поле обязательное - использовать 
-        // шаблон в котором должен быть хотя бы один символ
-        if(input.required && !checkTemplate) {
-            this.checkTemplate = /.+/;
-        }
 
-        // Если свойство checkTemplate было создано, добавить функциональность
-        if(this.checkTemplate) {
-            this.onEdit = this.onEdit.bind(this);
-            input.addEventListener('input', this.onEdit);
+        // Если передано свойство checkTemplate или поле обязательно, добавить отслеживание ввода
+        if(checkTemplate || input.required) {
+            // Пометить поле как отслеживаемое
+            this.taracked = true;
+            // Добавить обработку ввода
+            this.handleEdit = this.handleEdit.bind(this);
+            input.addEventListener('input', this.handleEdit);
             // Активировать проверку статуса
             this.updateStatus();
         }
     }
 
-    onEdit() {          
+    handleEdit() {          
         // Изменить статус поля в соответствии с новым значением        
         this.updateStatus();
     }
 
     defineStatus(value) {             
-        if(value === '') return STATUS_HOLDER.CLEAR; 
+        if(/^\s*$/.test(value)) return STATUS_HOLDER.CLEAR; 
+        if(!this.checkTemplate) return STATUS_HOLDER.OK;
         return this.checkTemplate.test(value) ? 
             STATUS_HOLDER.OK : 
             STATUS_HOLDER.ERROR;            
@@ -307,31 +385,31 @@ class InputFormattedField extends InputField {
             // Сохранить префикс поля
             this.prefix = prefix; 
             // Привязать методы к текущему объекту
-            this.onFocus = this.onFocus.bind(this);
-            this.onBlur = this.onBlur.bind(this);
+            this.handleFocus = this.handleFocus.bind(this);
+            this.handleBlur = this.handleBlur.bind(this);
             // Добавить слушатели
-            input.addEventListener('focus', this.onFocus);
-            input.addEventListener('blur', this.onBlur);
+            input.addEventListener('focus', this.handleFocus);
+            input.addEventListener('blur', this.handleBlur);
         }
     }
 
     // Переопределяем исходный метод
-    onEdit(event) {
+    handleEdit(event) {
         // Извлечь значение из input
         const value = event.target.value;
         // Форматировать значение и установить его в поле
         this.input.value = this.formatValue(value);
         // Запустить исходный метод родительского класса
-        super.onEdit(event);        
+        super.handleEdit(event);        
     }
 
-    onFocus(event) {
+    handleFocus(event) {
         if(event.target.value.length === 0) {
             event.target.value = this.prefix;
         }
     }
 
-    onBlur(event) {
+    handleBlur(event) {
         if(event.target.value.length <= this.prefix.length) {
             event.target.value = '';
             this.updateStatus();
@@ -379,6 +457,8 @@ class InputFormattedField extends InputField {
     }
 }
 
+// Специализированные поля
+
 class TelField extends InputFormattedField {
     constructor(input) {
         super(input, {
@@ -390,8 +470,12 @@ class TelField extends InputFormattedField {
     }
 }
 
-const STATUS_HOLDER = {
-    OK: 'OK',
-    ERROR: 'ERROR',
-    CLEAR: 'CLEAR'
+class EmailField extends InputField {
+    constructor(input) {
+        super(
+            input, 
+            /^[\w-][\w.-]+[\w-]@[a-z0-9.-]+\.[a-z]{2,}$/g
+        );
+    }
 }
+

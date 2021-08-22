@@ -1,13 +1,9 @@
 .photo-cover {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    @extend %fullscreen;
+
+    display: none;    
     align-items: flex-start;
-    background-color: var(--co-bg-black-op);
-    z-index: 1000000;
+    background-color: var(--co-bg-black-op);   
 
     @media screen and (min-width: $rs-xs-px) {
         align-items: center;

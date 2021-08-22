@@ -3,20 +3,21 @@
     <head>
         <%- include('./_common-blocks/_head/_head.ejs', {      
             title: 'ShootingClub - связаться с нами.', 
-            description: 'Наш адрес и форма обратной связи'}); %>
+            description: 'Наш адрес и форма обратной связи'}); %>   
     </head>
     <body>
         <div class="primary-wrapper">
             <%- include('./_common-blocks/_controls/_controls.ejs') %>  
             <%- include('./_common-blocks/_head-banner/_head-banner.ejs') %>                     
-            <main class="main-wrapper">
+            <main class="main-wrapper">   
                 <section class="content">                     
-                    <h2 class="content__header">Написать нам:</h2> 
+                    <h2 class="content__header">Написать нам:</h2>   
                     <p class="content__text"> 
                         По любым вопросам, Вы можете связаться с нами через форму обратной 
                         связи ниже, после чего мы обязательно перезвоним. 
                     </p>    
                     <%- include('./_page-data/contacts/_message-form/_message-form.ejs') %>              
+                    <%- include('./_page-data/contacts/_modal-window/_modal-window.ejs') %>                              
                 </section>
 
                 <section class="content contacts">
