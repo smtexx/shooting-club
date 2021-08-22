@@ -33,5 +33,6 @@ toDo.txt
 
 # Folders
 node_modules/
+dist/
 files/
 
